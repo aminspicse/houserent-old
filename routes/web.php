@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\admin\HomeController;
 use App\Http\Controllers\admin\CreatePost;
+use App\Http\Controllers\ProfilePicture;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -33,6 +34,7 @@ Auth::routes(['verify' => true]);
 
 Route::group(['prefix' => 'admin','middleware' => ['auth', 'verified','admin']], function() {
 	Route::get('/', [HomeController::class, 'index'])->name('dashboard');
+	Route::get('/profile-pic-change', [ProfilePicture::class, 'create'])->name('profile-pic-change');
     Route::get('/create',[CreatePost::class,'index'])->name('create');
     Route::post('/post/store',[CreatePost::class,'store']);
 

@@ -34,13 +34,13 @@
     <link href="{{ asset('public/admin/build/css/custom.css')}}" rel="stylesheet">
 </head>
 
-<body class="nav-md">
+<body class="nav-md" >
     <div class="container body">
         <div class="main_container">
             <div class="col-md-3 left_col menu_fixed">
                 <div class="left_col scroll-view">
                     <div class="navbar nav_title" style="border: 0;">
-                        <a href="index.html" class="site_title"><i class="fa fa-paw"></i>
+                        <a href=" " class="site_title">
                             <span>{{config('app.name')}}</span></a>
                     </div>
                     
@@ -57,7 +57,7 @@
                                     <li><a><i class="fa fa-home"></i> Home <span class="fa fa-chevron-down"></span></a>
                                         <ul class="nav child_menu">
                                             <li><a href="{{url('/admin/create')}}">Create Post</a></li>
-                                            <li><a href="http://localhost/houserent/welcome2">Dashboard2</a></li>
+                                            <li><a href="{{url('/admin/profile-pic-change')}}">Dashboard2</a></li>
                                             <li><a href="index3.html">Dashboard3</a></li>
                                         </ul>
                                     </li>
@@ -74,8 +74,8 @@
                                     <li><a><i class="fa fa-home"></i> Home <span class="fa fa-chevron-down"></span></a>
                                         <ul class="nav child_menu">
                                             <li><a href="{{url('/agent/create')}}">Create Post</a></li>
-                                            <li><a href="http://localhost/houserent/welcome2">Dashboard2</a></li>
-                                            <li><a href="index3.html">Dashboard3</a></li>
+                                            <li><a href="{{url('/admin/profile-pic-change')}}">Dashboard2</a></li>
+                                            <li><a href="{{url('/')}}">Dashboard3</a></li>
                                         </ul>
                                     </li>
                                     <li><a><i class="fa fa-edit"></i> Forms <span class="fa fa-chevron-down"></span></a>
