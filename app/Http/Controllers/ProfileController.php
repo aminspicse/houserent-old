@@ -1,15 +1,13 @@
 <?php
 
-namespace App\Http\Controllers\admin;
+namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\Post;
-use App\Models\GetData;
-use Redirect,Response;
+use App\Models\ProfilePicture;
+use App\Models\User;
 use Auth;
 use DB;
-class CreatePost extends Controller
+class ProfileController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -18,12 +16,8 @@ class CreatePost extends Controller
      */
     public function index()
     {
-        $data['country'] = GetData::active_country();
-        //$data['division'] = GetData::active_division();
-        return view('admin.create',$data);
+        //return view()
     }
-
-    
 
     /**
      * Show the form for creating a new resource.
@@ -32,7 +26,7 @@ class CreatePost extends Controller
      */
     public function create()
     {
-        //
+        return view('profile.change-profile-pic');
     }
 
     /**
@@ -43,21 +37,13 @@ class CreatePost extends Controller
      */
     public function store(Request $request)
     {
-        $filename = $request->photo->store('public/image');
+        $filename = $request->profilepicture->store('public/image');
         $imagelink = substr($filename, 12);
-        return Post::create([
+
+        return ProfilePicture::create([
             'user_id' => Auth::user()->id,
-            'title' => $request->title,
-            'address' => $request->address,
-            'area'      => $request->area,
-            'nm_bedroom' => $request->nm_bedroom,
-            'nm_bathroom' => $request->nm_bathroom,
-            'nm_garage'     => $request->nm_garage,
-            'details'       => $request->details,
-            'image'         => $imagelink,
-            'video'         => $request->video
+            'picture' => 'imagelink'
         ]);
-        return $request->title;
     }
 
     /**
@@ -89,9 +75,31 @@ class CreatePost extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        //
+        $data = User::find(Auth::user()->id);
+
+        if(!empty($request->profilepicture)){
+            $filename = $request->profilepicture->store('public/image');
+            $imagelink = substr($filename, 12);
+        }else{
+            $imagelink = Auth::user()->picture;
+        }
+        
+        if(!empty($request->name)){
+            $name = $request->name;
+        }else{
+            $name = Auth::user()->name;
+        }
+        
+
+        
+        $data->picture = $imagelink;
+        $data->name = $name;
+        $data->save();
+
+
+        return redirect('/change-profile');
     }
 
     /**

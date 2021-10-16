@@ -4,17 +4,9 @@ use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\admin\HomeController;
 use App\Http\Controllers\admin\CreatePost;
-use App\Http\Controllers\ProfilePicture;
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
+use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\AppsData;
+use App\Http\Controllers\mst\AppsCountryController;
 
 
 
@@ -34,15 +26,30 @@ Auth::routes(['verify' => true]);
 
 Route::group(['prefix' => 'admin','middleware' => ['auth', 'verified','admin']], function() {
 	Route::get('/', [HomeController::class, 'index'])->name('dashboard');
-	Route::get('/profile-pic-change', [ProfilePicture::class, 'create'])->name('profile-pic-change');
     Route::get('/create',[CreatePost::class,'index'])->name('create');
     Route::post('/post/store',[CreatePost::class,'store']);
 
+	// COuntry
+	Route::resource('/country',AppsCountryController::class);
 });
+
+Route::get('/create',[CreatePost::class,'index']);
+Route::post('/getdivision', [AppsData::class,'getDivision']);
+Route::post('/getdistrict', [AppsData::class,'getDistrict']);
+Route::post('/getthana', [AppsData::class,'getThana']);
+Route::post('/getunion', [AppsData::class,'getUnion']);
 
 Route::group(['prefix' => 'agent','middleware' => ['auth', 'verified','agent']], function() {
 	Route::get('/', [HomeController::class, 'index'])->name('dashboard');
     Route::get('/create',[CreatePost::class,'index'])->name('create');
+	//Route::get('/getdivision/{id}', [CreatePost::class,'getdivision']);
     Route::post('/post/store',[CreatePost::class,'store']);
+
+});
+
+Route::group(['middleware' => ['auth', 'verified']], function() {
+	Route::get('/change-profile', [ProfileController::class, 'create'])->name('change-profile');
+	Route::post('/change-profile', [ProfileController::class, 'store'])->name('change-profile');
+	Route::post('/update-profile', [ProfileController::class, 'update'])->name('update-profile');
 
 });

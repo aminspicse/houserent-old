@@ -1,10 +1,11 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\mst;
 
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-class ProfilePicture extends Controller
+class AppsDistrictController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -13,7 +14,7 @@ class ProfilePicture extends Controller
      */
     public function index()
     {
-        //return view()
+        //
     }
 
     /**
@@ -23,7 +24,7 @@ class ProfilePicture extends Controller
      */
     public function create()
     {
-        return view('change-profile-pic');
+        //
     }
 
     /**

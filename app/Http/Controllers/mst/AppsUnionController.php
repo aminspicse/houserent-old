@@ -1,15 +1,11 @@
 <?php
 
-namespace App\Http\Controllers\admin;
+namespace App\Http\Controllers\mst;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\Post;
-use App\Models\GetData;
-use Redirect,Response;
-use Auth;
-use DB;
-class CreatePost extends Controller
+
+class AppsUnionController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -18,12 +14,8 @@ class CreatePost extends Controller
      */
     public function index()
     {
-        $data['country'] = GetData::active_country();
-        //$data['division'] = GetData::active_division();
-        return view('admin.create',$data);
+        //
     }
-
-    
 
     /**
      * Show the form for creating a new resource.
@@ -43,21 +35,7 @@ class CreatePost extends Controller
      */
     public function store(Request $request)
     {
-        $filename = $request->photo->store('public/image');
-        $imagelink = substr($filename, 12);
-        return Post::create([
-            'user_id' => Auth::user()->id,
-            'title' => $request->title,
-            'address' => $request->address,
-            'area'      => $request->area,
-            'nm_bedroom' => $request->nm_bedroom,
-            'nm_bathroom' => $request->nm_bathroom,
-            'nm_garage'     => $request->nm_garage,
-            'details'       => $request->details,
-            'image'         => $imagelink,
-            'video'         => $request->video
-        ]);
-        return $request->title;
+        //
     }
 
     /**

@@ -54,16 +54,22 @@
                                 <!-- Admin Option -->
                                 <h3>Admin</h3>
                                 <ul class="nav side-menu">
+                                    <li><a><i class="fa fa-database"></i> Master Data <span class="fa fa-chevron-down"></span></a>
+                                        <ul class="nav child_menu">
+                                            <li><a href="{{url('/admin/country')}}">Country</a></li>
+                                            <li><a href="{{url('/admin/division')}}">Division</a></li>
+                                        </ul>
+                                    </li>
                                     <li><a><i class="fa fa-home"></i> Home <span class="fa fa-chevron-down"></span></a>
                                         <ul class="nav child_menu">
                                             <li><a href="{{url('/admin/create')}}">Create Post</a></li>
-                                            <li><a href="{{url('/admin/profile-pic-change')}}">Dashboard2</a></li>
+                                            <li><a href="{{url('/admin/profile-pic')}}">Dashboard2</a></li>
                                             <li><a href="index3.html">Dashboard3</a></li>
                                         </ul>
                                     </li>
                                     <li><a><i class="fa fa-edit"></i> Forms <span class="fa fa-chevron-down"></span></a>
                                         <ul class="nav child_menu">
-                                            <li><a href="form.html">General Form</a></li>
+                                            <li><a href="{{url('/admin/profile-pic-change')}}">General Form</a></li>
                                         </ul>
                                     </li>
                                 </ul>
@@ -119,11 +125,11 @@
                             <li class="nav-item dropdown open" style="padding-left: 15px;">
                                 <a href="javascript:;" class="user-profile dropdown-toggle" aria-haspopup="true"
                                     id="navbarDropdown" data-toggle="dropdown" aria-expanded="false">
-                                    <img src="{{asset('public/build/images/img.jpg')}}" alt="">{{Auth::user()->name}}
+                                    <img src="{{url('public/storage/image'.Auth::user()->picture)}}" alt="">{{Auth::user()->name}}
                                 </a>
                                 <div class="dropdown-menu dropdown-usermenu pull-right"
                                     aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="javascript:;"> Profile</a>
+                                    <a class="dropdown-item" href="{{url('/change-profile')}}"> Profile</a>
                                     <a class="dropdown-item" href="javascript:;">
                                         <span class="badge bg-red pull-right">50%</span>
                                         <span>Settings</span>
@@ -154,12 +160,29 @@
             </style>
             <div class="right_col" role="main">
                 <div class="contenttop">
-                    @yield('content')
+                   
+                    <div class="row">
+                        <div class="col-md-12 col-sm-12 ">
+                            <div class="x_panel">
+                                <div class="x_title">
+                                    @yield('content_title')
+                                    
+                                    <div class="clearfix"></div>
+                                </div>
+                                <div class="x_content">
+                                     @yield('content')
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    
+    
     <!-- jQuery -->
     <script src="{{ asset('public/admin/vendors/jquery/dist/jquery.min.js')}}"></script>
     <!-- Bootstrap -->
@@ -174,6 +197,57 @@
 
     <!-- Custom Theme Scripts -->
     <script src="{{ asset('public/admin/build/js/custom.min.js')}}"></script>
+    <script>
+        jQuery(document).ready(function(){
+        jQuery('#country').change(function(){
+            let cid = jQuery(this).val();
+            jQuery.ajax({
+                url: '/houserent/getdivision',
+                type: 'post',
+                data: 'cid='+cid+'&_token={{csrf_token()}}',
+                success: function(result){
+                    jQuery('#state').html(result);
+                }
+            });
+        });
+
+        jQuery('#state').change(function(){
+            let sid = jQuery(this).val();
+            jQuery.ajax({
+                url: '/houserent/getdistrict',
+                type: 'post',
+                data: 'sid='+sid+'&_token={{csrf_token()}}',
+                success: function(result){
+                    jQuery('#district').html(result);
+                }
+            });
+        });
+
+        jQuery('#district').change(function(){
+            let dist = jQuery(this).val();
+            jQuery.ajax({
+                url: '/houserent/getthana',
+                type: 'post',
+                data: 'dist='+dist+'&_token={{csrf_token()}}',
+                success: function(result){
+                    jQuery('#thana').html(result);
+                }
+            });
+        });
+
+        jQuery('#thana').change(function(){
+            let tna = jQuery(this).val();
+            jQuery.ajax({
+                url: '/houserent/getunion',
+                type: 'post',
+                data: 'tna='+tna+'&_token={{csrf_token()}}',
+                success: function(result){
+                    jQuery('#union').html(result);
+                }
+            });
+        });
+     });
+    </script>
 </body>
 
 </html>
