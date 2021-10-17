@@ -10,6 +10,8 @@
 
     <title>{{ config('app.name', 'HRentSolution') }}</title>
 
+ <!-- Bootstrap -->
+    <link href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css">
     <!-- Bootstrap -->
     <link href="{{ asset('public/admin/vendors/bootstrap/dist/css/bootstrap.min.css')}}" rel="stylesheet">
     <!-- Font Awesome -->
@@ -19,6 +21,15 @@
 
     <!-- iCheck -->
     <link href="{{ asset('public/admin/vendors/iCheck/skins/flat/green.css')}}" rel="stylesheet">
+
+    <!-- Datatables -->
+    
+    <link href="{{ asset('public/admin/vendors/datatables.net-bs/css/dataTables.bootstrap.min.css')}}" rel="stylesheet">
+    <link href="{{ asset('public/admin/vendors/datatables.net-buttons-bs/css/buttons.bootstrap.min.css')}}" rel="stylesheet">
+    <link href="{{ asset('public/admin/vendors/datatables.net-fixedheader-bs/css/fixedHeader.bootstrap.min.css')}}" rel="stylesheet">
+    <link href="{{ asset('public/admin/vendors/datatables.net-responsive-bs/css/responsive.bootstrap.min.css')}}" rel="stylesheet">
+    <link href="{{ asset('public/admin/vendors/datatables.net-scroller-bs/css/scroller.bootstrap.min.css')}}" rel="stylesheet">
+    
     <!-- bootstrap-progressbar -->
     <link href="{{ asset('public/admin/vendors/bootstrap-progressbar/css/bootstrap-progressbar-3.3.4.min.css')}}"
         rel="stylesheet">
@@ -27,11 +38,12 @@
     <!-- bootstrap-daterangepicker -->
     <link href="{{ asset('public/admin/vendors/bootstrap-daterangepicker/daterangepicker.css')}}" rel="stylesheet">
     <!-- jQuery custom content scroller -->
-    <link href="{{ asset('public/admin/vendors/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.min.css')}}"
-        rel="stylesheet" />
+    <link href="{{ asset('public/admin/vendors/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.min.css')}}" rel="stylesheet" />
 
+    
     <!-- Custom Theme Style -->
     <link href="{{ asset('public/admin/build/css/custom.css')}}" rel="stylesheet">
+    
 </head>
 
 <body class="nav-md" >
@@ -179,24 +191,35 @@
             </div>
         </div>
     </div>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
-    
-    
-    <!-- jQuery -->
-    <script src="{{ asset('public/admin/vendors/jquery/dist/jquery.min.js')}}"></script>
-    <!-- Bootstrap -->
-    <script src="{{ asset('public/admin/vendors/bootstrap/dist/js/bootstrap.bundle.min.js')}}"></script>
-    <!-- FastClick -->
-    <script src="{{ asset('public/admin/vendors/fastclick/lib/fastclick.js')}}"></script>
-    <!-- NProgress -->
-    <script src="{{ asset('public/admin/vendors/nprogress/nprogress.js')}}"></script>
-    <!-- jQuery custom content scroller -->
-    <script
-        src="{{ asset('public/admin/vendors/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.concat.min.js')}}"></script>
+   <!-- jQuery -->
+  <script src="{{ asset('public/admin/vendors/jquery/dist/jquery.min.js')}}"></script>
+  <!-- Bootstrap -->
+  <script src="{{ asset('public/admin/vendors/bootstrap/dist/js/bootstrap.bundle.min.js')}}"></script>
+  <!-- FastClick -->
+  <script src="{{ asset('public/admin/vendors/fastclick/lib/fastclick.js')}}"></script>
+  <!-- NProgress -->
+  <script src="{{ asset('public/admin/vendors/nprogress/nprogress.js')}}"></script>
+  <!-- iCheck -->
+  <script src="{{ asset('public/admin/vendors/iCheck/icheck.min.js')}}"></script>
+  <!-- Datatables -->
+  <script src="{{ asset('public/admin/vendors/datatables.net/js/jquery.dataTables.min.js')}}"></script>
+  <script src="{{ asset('public/admin/vendors/datatables.net-bs/js/dataTables.bootstrap.min.js')}}"></script>
+  <script src="{{ asset('public/admin/vendors/datatables.net-buttons/js/dataTables.buttons.min.js')}}"></script>
+  <script src="{{ asset('public/admin/vendors/datatables.net-buttons-bs/js/buttons.bootstrap.min.js')}}"></script>
+  <script src="{{ asset('public/admin/vendors/datatables.net-buttons/js/buttons.flash.min.js')}}"></script>
+  <script src="{{ asset('public/admin/vendors/datatables.net-buttons/js/buttons.html5.min.js')}}"></script>
+  <script src="{{ asset('public/admin/vendors/datatables.net-buttons/js/buttons.print.min.js')}}"></script>
+  <script src="{{ asset('public/admin/vendors/datatables.net-fixedheader/js/dataTables.fixedHeader.min.js')}}"></script>
+  <script src="{{ asset('public/admin./vendors/datatables.net-keytable/js/dataTables.keyTable.min.js')}}"></script>
+  <script src="{{ asset('public/admin/vendors/datatables.net-responsive/js/dataTables.responsive.min.js')}}"></script>
+  <script src="{{ asset('public/admin/vendors/datatables.net-responsive-bs/js/responsive.bootstrap.js')}}"></script>
+  <script src="{{ asset('public/admin/vendors/datatables.net-scroller/js/dataTables.scroller.min.js')}}"></script>
+  <script src="{{ asset('public/admin/vendors/jszip/dist/jszip.min.js')}}"></script>
+  <script src="{{ asset('public/admin/vendors/pdfmake/build/pdfmake.min.js')}}"></script>
+  <script src="{{ asset('public/admin/vendors/pdfmake/build/vfs_fonts.js')}}"></script>
 
-    <!-- Custom Theme Scripts -->
-    <script src="{{ asset('public/admin/build/js/custom.min.js')}}"></script>
+  <!-- Custom Theme Scripts -->
+  <script src="{{ asset('public/admin/build/js/custom.min.js')}}"></script>
     <script>
         jQuery(document).ready(function(){
         jQuery('#country').change(function(){

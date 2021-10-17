@@ -1,17 +1,20 @@
 @extends('layouts.layout')
 
 @section('content_title')
-    <h2>Country List</h2>
+<h2>Country List</h2>
+<ul class="nav navbar-right panel_toolbox">
+    <a href="">Create New Country</a>
+</ul>
 @endsection
 @section('content')
 
-<table class="table table-striped">
+<table id="datatable-buttons" class="table table-striped table-bordered dataTable no-footer dtr-inline" style="width: 100%;" role="grid" aria-describedby="datatable-buttons_info">
     <thead>
         <tr>
-            <th scope="col">SL</th>
-            <th scope="col">Country</th>
-            <th scope="col">Country Code</th>
-            <th scope="col">Dial Code</th>
+            <th>SL</th>
+            <th>Country</th>
+            <th>Country Code</th>
+            <th>Dial Code</th>
             <th>Status</th>
             <th>Action</th>
         </tr>
@@ -39,5 +42,4 @@
         @endforeach
     </tbody>
 </table>
-
 @endsection
