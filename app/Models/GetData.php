@@ -15,4 +15,7 @@ class GetData extends Model
     public static function active_division(){
         return DB::table('apps_division')->get();
     }
+    public static function getStatus(){
+        return DB::table('mst_status')->get();
+    }
 }

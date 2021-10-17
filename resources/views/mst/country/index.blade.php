@@ -3,7 +3,7 @@
 @section('content_title')
 <h2>Country List</h2>
 <ul class="nav navbar-right panel_toolbox">
-    <a href="">Create New Country</a>
+    <a href="{{url('/admin/country/create')}}">Add New Country</a>
 </ul>
 @endsection
 @section('content')
