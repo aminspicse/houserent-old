@@ -11,22 +11,28 @@ class Action extends Model
     use HasFactory;
 
     /*
-
+        AppsDivisionController, AppsDistrictController
     */
-    public static function changeStatus($table,$whereName,$whereValue,$statusColumn){
-        $status = DB::table($table)->where($whereName,'=',$whereValue)->first();
-        //return $status->division_name;
-        if($status->division_status == 1)
+    public static function changeStatus($data){
+        $table      = $data['table'];
+        $where      = $data['where'];
+        $value      = $data['value'];
+        $column     = $data['column'];
+        $status     = $data['status'];
+
+        $st = DB::table($table)->where($where,'=',$value)->first();
+
+        if($st->$status == 1)
         {
-            DB::table($table)->where($whereName,'=', $whereValue)
+            DB::table($table)->where($where,'=', $value)
                     ->limit(1)
-                    ->update(array($statusColumn => 0));
-                    return '0'.$status->division_name;
+                    ->update(array($status => 0));
+                    return '0'.$st->$column;
         }else{
-            DB::table($table)->where($whereName,'=', $whereValue)
+            DB::table($table)->where($where,'=', $value)
                     ->limit(1)
-                    ->update(array($statusColumn => 1));
-                    return '1'.$status->division_name;
+                    ->update(array($status => 1));
+                    return '1'.$st->$column;
         }
         
     }

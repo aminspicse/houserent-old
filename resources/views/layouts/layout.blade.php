@@ -70,6 +70,7 @@
                                         <ul class="nav child_menu">
                                             <li><a href="{{url('/admin/country')}}">Country</a></li>
                                             <li><a href="{{url('/admin/division')}}">Division</a></li>
+                                            <li><a href="{{url('/admin/district')}}">District</a></li>
                                         </ul>
                                     </li>
                                     <li><a><i class="fa fa-home"></i> Home <span class="fa fa-chevron-down"></span></a>

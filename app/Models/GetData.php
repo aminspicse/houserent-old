@@ -62,6 +62,34 @@ class GetData extends Model
         ->get();
     }
 
+    /*
+        AppsDistrictController
+    */
+    public static function allDistrict(){
+        return DB::table('apps_district as dt')
+        ->leftJoin('apps_division as dv', 'dt.division_id', '=', 'dv.division_id')
+        ->leftJoin('apps_country as c', 'dv.country_id', '=', 'c.country_id')
+        ->select('dt.*','dv.*','c.*') 
+        ->orderBy('dt.district_status','DESC')
+        ->orderBy('c.country_name','ASC')
+        ->orderBy('dv.division_name','ASC')
+        ->orderBy('dt.district_name','ASC')
+        ->get();
+    }
+
+    /*
+        AppsDistrictController
+    */
+    public static function getDistrict($id){
+        return DB::table('apps_district as dt')
+        ->leftJoin('apps_division as dv', 'dt.division_id', '=', 'dv.division_id')
+        ->leftJoin('apps_country as c', 'dv.country_id', '=', 'c.country_id')
+        ->leftJoin('mst_status as st', 'dt.district_status', '=', 'st.status_id')
+        ->select('dt.*','dv.*','c.*','st.*') 
+        ->where('district_id','=',$id)
+        ->first();
+    }
+
     public static function getStatus(){
         return DB::table('mst_status')->get();
     }

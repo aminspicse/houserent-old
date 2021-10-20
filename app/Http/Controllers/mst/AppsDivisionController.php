@@ -123,7 +123,14 @@ class AppsDivisionController extends Controller
      */
     public function destroy($id)
     {
-        $result = Action::changeStatus('apps_division','division_id',$id,'division_status');
+        $data['table']      = 'apps_division';
+        $data['where']      = 'division_id';
+        $data['value']      =  $id;
+        $data['column']     =  'division_name';
+        $data['status']     =  'division_status';
+
+        $result     = Action::changeStatus($data);
+
         $status = substr($result,0,1);
         $division = substr($result,1,100);
         if($status == 1)
