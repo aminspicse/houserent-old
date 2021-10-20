@@ -8,6 +8,7 @@
 @endsection
 @section('content')
 
+@include('flash-message')
 <table id="datatable-buttons" class="table table-striped table-bordered dataTable no-footer dtr-inline" style="width: 100%;" role="grid" aria-describedby="datatable-buttons_info">
     <thead>
         <tr>
@@ -15,6 +16,8 @@
             <th>Country</th>
             <th>Country Code</th>
             <th>Dial Code</th>
+            <th>Currency Name</th>
+            <th>Currency Symbol</th>
             <th>Status</th>
             <th>Action</th>
         </tr>
@@ -27,16 +30,28 @@
             <td>{{$country->country_name}}</td>
             <td>{{$country->country_code}}</td>
             <td>{{$country->dial_code}}</td>
+            <td>{{$country->currency_name}}</td>
+            <td>{{$country->currency_symbol}}</td>
             <td>
                 @if($country->country_status == 1)
-                <p class="text-primary">Active</p>
+                
+                    <form action="{{url('admin/country/')}}/{{$country->country_id}}" method="post">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit"  class="btn btn-danger ">Inactive</button>
+                    </form>
                 @else
-                <p class="text-danger">Inactive</p>
+                    <form action="{{url('admin/country/')}}/{{$country->country_id}}" method="post">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit"  class="btn btn-success ">Active</button>
+                    </form>
                 @endif
             </td>
             <td>
-                <a href="" class="btn btn-info fa fa-pencil fa-fw" title="Edit"></a>
-                <a href="" class="btn btn-danger fa fa-trash-o fa-fw" title="Delete"></a>
+                <div class="row">
+                    <a class="btn" href="{{url('admin/country/')}}/{{$country->country_id}}/edit"><i class="fa fa-edit"></i></a>
+                </div>
             </td>
         </tr>
         @endforeach

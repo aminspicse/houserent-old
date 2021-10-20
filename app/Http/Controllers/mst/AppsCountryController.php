@@ -17,7 +17,7 @@ class AppsCountryController extends Controller
      */
     public function index()
     {
-        $data['country']    =   DB::table('apps_country')->whereIn('country_status', array(0,1))->orderBy('country_name','asc')->get();
+        $data['country']    =   GetData::allCountry();
         return view('mst.country.index',$data);
     }
 
@@ -30,6 +30,7 @@ class AppsCountryController extends Controller
     {
         $data['status'] = GetData::getStatus();
         return view('mst.country.create',$data);
+
     }
 
     /**
@@ -42,10 +43,18 @@ class AppsCountryController extends Controller
     {
         $request->validate([
             'country_name' => ['required', 'unique:apps_country'],
-            //'body' => ['required'],
+            'country_code' => ['required'],
+            'dial_code'    => ['required'],
+            'currency_name' => ['required'],
+            'currency_code' => ['required'],
+            'currency_symbol'   => ['required'],
+            'country_status'    => ['required','numeric']
+        ],
+        [
+            'country_status.numeric' => 'Status is  Required',
         ]);
 
-        return AppsCountry::create([
+        AppsCountry::create([
             'country_name'      => $request->country_name, 
             'country_code'      => $request->country_code, 
             'dial_code'         => $request->dial_code,
@@ -54,7 +63,7 @@ class AppsCountryController extends Controller
             'currency_code'     => $request->currency_code,
             'country_status'    => $request->country_status
         ]);
-        return request('country_name');
+        return redirect(url('admin/country'))->with('success',$request->country_name.' Successfully Created!');
     }
 
     /**
@@ -65,7 +74,7 @@ class AppsCountryController extends Controller
      */
     public function show($id)
     {
-        //
+        //return $id;
     }
 
     /**
@@ -76,7 +85,9 @@ class AppsCountryController extends Controller
      */
     public function edit($id)
     {
-        //
+        $data['country'] = GetData::getCountry($id);
+        $data['status'] = GetData::getStatus();
+        return view('mst.country.edit',$data);
     }
 
     /**
@@ -88,7 +99,30 @@ class AppsCountryController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            'country_name' => ['required'],
+            'country_code' => ['required'],
+            'dial_code'    => ['required'],
+            'currency_name' => ['required'],
+            'currency_code' => ['required'],
+            'currency_symbol'   => ['required'],
+            'country_status'    => ['required','numeric']
+        ],
+        [
+            'country_status.numeric' => 'Status is  Required',
+        ]);
+
+        AppsCountry::where('country_id', '=',$id)
+        ->update([
+            'country_name'      => $request->country_name, 
+            'country_code'      => $request->country_code, 
+            'dial_code'         => $request->dial_code,
+            'currency_name'     => $request->currency_name,
+            'currency_symbol'   => $request->currency_symbol,
+            'currency_code'     => $request->currency_code,
+            'country_status'    => $request->country_status
+        ]);
+        return redirect(url('admin/country'))->with('info',$request->country_name.' Successfully Updated!');
     }
 
     /**
@@ -99,6 +133,19 @@ class AppsCountryController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $status = AppsCountry::where('country_id',$id)->first();
+        if($status->country_status == 1){
+            $newstatus = 0;
+            $country = AppsCountry::where('country_id','=',$id)
+                    ->limit(1)
+                    ->update(array('country_status' => $newstatus));
+            return redirect(url('admin/country'))->with('warning',$status->country_name.' Inactivated!');
+        }else{
+            $newstatus = 1;
+            $country = AppsCountry::where('country_id','=',$id)
+                    ->limit(1)
+                    ->update(array('country_status' => $newstatus));
+            return redirect(url('admin/country'))->with('success',$status->country_name.' Activated!');
+        }
     }
 }

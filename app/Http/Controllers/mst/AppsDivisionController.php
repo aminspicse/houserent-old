@@ -4,7 +4,10 @@ namespace App\Http\Controllers\mst;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-
+use App\Models\GetData;
+use App\Models\mst\AppsDivision;
+use App\Models\Action;
+use DB;
 class AppsDivisionController extends Controller
 {
     /**
@@ -14,7 +17,8 @@ class AppsDivisionController extends Controller
      */
     public function index()
     {
-        //
+        $data['division'] = GetData::allDivision();
+        return view('mst.division.index',$data);
     }
 
     /**
@@ -24,7 +28,10 @@ class AppsDivisionController extends Controller
      */
     public function create()
     {
-        //
+        $data['country'] = GetData::activatedCountry();
+        $data['status'] = GetData::getStatus();
+
+        return view('mst.division.create',$data);
     }
 
     /**
@@ -35,7 +42,25 @@ class AppsDivisionController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'country_name'      => ['required', 'numeric'],
+            'division_name'     => ['required'],
+            'local_name'        => ['required'],
+            'division_status'   => ['required','numeric']
+        ],
+        [
+            'country_name.numeric'    => 'Country Name is Required',
+            'division_status.numeric' => 'Status is  Required',
+        ]);
+
+        AppsDivision::create([
+            'country_id'        => $request->country_name,
+            'division_name'     => $request->division_name,
+            'local_name'        => $request->local_name,
+            'division_status'   => $request->division_status
+        ]);
+        
+        return redirect(url('admin/division'))->with('success', $request->division_name.' Created Successfully!');
     }
 
     /**
@@ -57,7 +82,10 @@ class AppsDivisionController extends Controller
      */
     public function edit($id)
     {
-        //
+        $data['country']    = GetData::activatedCountry();
+        $data['division']   = GetData::getDivision($id);
+        $data['status']     = GetData::getStatus();
+        return view('mst.division.edit',$data);
     }
 
     /**
@@ -69,7 +97,22 @@ class AppsDivisionController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            'division_name'     => ['required'],
+            'local_name'        => ['required'],
+            'division_status'   => ['required','numeric']
+        ],
+        [
+            'division_status.numeric' => 'Status is  Required',
+        ]);
+
+        AppsDivision::where('division_id','=',$id)
+            ->update([
+                'division_name'     => $request->division_name,
+                'local_name'        => $request->local_name,
+                'division_status'   => $request->division_status,
+            ]);
+        return redirect(url('/admin/division'))->with('success',$request->division_name.' Successfully Updated!');
     }
 
     /**
@@ -80,6 +123,14 @@ class AppsDivisionController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $result = Action::changeStatus('apps_division','division_id',$id,'division_status');
+        $status = substr($result,0,1);
+        $division = substr($result,1,100);
+        if($status == 1)
+        {
+            return redirect(url('/admin/division'))->with('success',$division.' Status Activated');
+        }else{
+            return redirect(url('/admin/division'))->with('error',$division.' Status Inactivated');
+        }
     }
 }

@@ -18,7 +18,7 @@ class CreatePost extends Controller
      */
     public function index()
     {
-        $data['country'] = GetData::active_country();
+        $data['country'] = GetData::activatedCountry();
         //$data['division'] = GetData::active_division();
         return view('admin.create',$data);
     }

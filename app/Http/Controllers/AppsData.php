@@ -4,12 +4,13 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use DB;
+use App\Models\GetData;
 class AppsData extends Controller
 {
     public function getDivision(Request $request)
     {
         $cid = $request->post('cid');
-        $state = DB::table('apps_division')->where('country_id',$cid)->get();
+        $state = GetData::dependentDivision($cid);//DB::table('apps_division')->where('country_id',$cid)->get();
         $html = '<option>Select State/Division</option>';
         foreach($state as $list){
             $html .= '<option value="'.$list->division_id.'">'.$list->division_name.' ('.$list->local_name.')</option>';

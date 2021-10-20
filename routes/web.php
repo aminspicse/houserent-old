@@ -7,6 +7,7 @@ use App\Http\Controllers\admin\CreatePost;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\AppsData;
 use App\Http\Controllers\mst\AppsCountryController;
+use App\Http\Controllers\mst\AppsDivisionController;
 
 
 
@@ -31,6 +32,7 @@ Route::group(['prefix' => 'admin','middleware' => ['auth', 'verified','admin']],
 
 	// COuntry
 	Route::resource('/country',AppsCountryController::class);
+	Route::resource('/division',AppsDivisionController::class);
 });
 
 Route::get('/create',[CreatePost::class,'index']);
