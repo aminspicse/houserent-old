@@ -10,7 +10,7 @@ class AppsData extends Controller
     public function getDivision(Request $request)
     {
         $cid = $request->post('cid');
-        $state = GetData::dependentDivision($cid);//DB::table('apps_division')->where('country_id',$cid)->get();
+        $state = GetData::dependentDivision($cid); //DB::table('apps_division')->where('country_id',$cid)->get();
         $html = '<option>Select State/Division</option>';
         foreach($state as $list){
             $html .= '<option value="'.$list->division_id.'">'.$list->division_name.' ('.$list->local_name.')</option>';
@@ -21,7 +21,7 @@ class AppsData extends Controller
     public function getDistrict(Request $request)
     {
         $sid = $request->post('sid');
-        $dist = DB::table('apps_district')->where('division_id',$sid)->get();
+        $dist = GetData::dependentDistrict($sid); //DB::table('apps_district')->where('division_id',$sid)->get();
         $html = '<option>Select District</option>';
         foreach($dist as $list){
             $html .= '<option value="'.$list->district_id.'">'.$list->district_name.' ('.$list->local_name.')</option>';

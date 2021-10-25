@@ -9,6 +9,8 @@ use App\Http\Controllers\AppsData;
 use App\Http\Controllers\mst\AppsCountryController;
 use App\Http\Controllers\mst\AppsDivisionController;
 use App\Http\Controllers\mst\AppsDistrictController;
+use App\Http\Controllers\mst\AppsUpazilaController;
+use App\Http\Controllers\mst\AppsUnionController;
 
 
 
@@ -35,6 +37,8 @@ Route::group(['prefix' => 'admin','middleware' => ['auth', 'verified','admin']],
 	Route::resource('/country',AppsCountryController::class);
 	Route::resource('/division',AppsDivisionController::class);
 	Route::resource('/district',AppsDistrictController::class);
+	Route::resource('/upazila',AppsUpazilaController::class);
+	Route::resource('/union',AppsUnionController::class);
 });
 
 Route::get('/create',[CreatePost::class,'index']);

@@ -100,7 +100,29 @@ class AppsDistrictController extends Controller
      */
     public function update(Request $request, $id)
     {
-        return $request->all();
+        $request->validate([
+            'country_name'              => ['required', 'numeric'],
+            'division_name'             => ['required','numeric'],
+            'district_name'             => ['required'],
+            'local_name'                => ['required'],
+            'district_status'           => ['required','numeric']
+        ],
+        [
+            'country_name.numeric'      => 'Country Name is Required',
+            'division_name.numeric'     => 'Division Name is Required',
+            'district_status.numeric'   => 'Status is  Required',
+        ]);
+
+        AppsDistrict::where('district_id','=',$id)
+            ->update([
+                'district_name'     => $request->district_name,
+                'local_name'        => $request->local_name,
+                'district_status'   => $request->district_status,
+                'lat'               => $request->lat,
+                'lon'               => $request->lon
+            ]);
+        return redirect(url('/admin/district'))->with('success',$request->district_name.' Successfully Updated!');
+   
     }
 
     /**
@@ -111,11 +133,11 @@ class AppsDistrictController extends Controller
      */
     public function destroy($id)
     {
-        $data['table']  = 'apps_district';
-        $data['where']  = 'district_id';
-        $data['value']  =  $id;
-        $data['column']  =  'district_name';
-        $data['status']  =  'district_status';
+        $data['table']      = 'apps_district';
+        $data['where']      = 'district_id';
+        $data['value']      = $id;
+        $data['column']     = 'district_name';
+        $data['status']     = 'district_status';
 
         $result     = Action::changeStatus($data);
 

@@ -53,16 +53,6 @@ class GetData extends Model
     }
 
     /*
-    users of division_dependent($country)
-    Class Name: AppsData
-    */
-    public static function dependentDivision($country){
-        return DB::table('apps_division as d')
-        ->where([['d.division_status', '=',1],['country_id','=',$country]])
-        ->get();
-    }
-
-    /*
         AppsDistrictController
     */
     public static function allDistrict(){
@@ -90,6 +80,67 @@ class GetData extends Model
         ->first();
     }
 
+    /*
+        AppsUpazilaController
+    */
+    public static function allUpazila(){
+        return DB::table('apps_upazila as up')
+        ->leftJoin('apps_district as dt', 'up.district_id', '=', 'dt.district_id')
+        ->leftJoin('apps_division as dv', 'dt.division_id', '=', 'dv.division_id')
+        ->leftJoin('apps_country as c', 'dv.country_id', '=', 'c.country_id')
+        ->select('up.*','dt.district_name','dv.division_name','c.country_name') 
+        ->orderBy('dt.district_status','DESC')
+        ->orderBy('c.country_name','ASC')
+        ->orderBy('dv.division_name','ASC')
+        ->orderBy('dt.district_name','ASC')
+        ->orderBy('up.upazila_name','ASC')
+        ->get();
+    }
+    /*
+        AppsUpazilaController
+    */
+    public static function getUpazila($id){
+        return DB::table('apps_upazila as up')
+        ->leftJoin('apps_district as dt', 'up.district_id', '=', 'dt.district_id')
+        ->leftJoin('apps_division as dv', 'dt.division_id', '=', 'dv.division_id')
+        ->leftJoin('apps_country as c', 'dv.country_id', '=', 'c.country_id')
+        ->leftJoin('mst_status as st', 'up.upazila_status', '=', 'st.status_id')
+        ->select('up.*','st.*','dt.district_name','dv.division_name','dv.division_id','c.country_name','c.country_id') 
+        ->where('up.upazila_id','=',$id)
+        ->first();
+    }
+
+    /*
+        AppsUpazilaController
+    */
+    public static function allUnion(){
+        return DB::table('apps_union as union')
+        ->leftJoin('apps_upazila as up', 'union.upazila_id', '=', 'up.upazila_id')
+        ->leftJoin('apps_district as dt', 'up.district_id', '=', 'dt.district_id')
+        ->leftJoin('apps_division as dv', 'dt.division_id', '=', 'dv.division_id')
+        ->leftJoin('apps_country as c', 'dv.country_id', '=', 'c.country_id')
+        ->select('union.*','up.upazila_name','dt.district_name','dv.division_name','c.country_name') 
+        ->orderBy('dt.district_status','DESC')
+        ->orderBy('c.country_name','ASC')
+        ->orderBy('dv.division_name','ASC')
+        ->orderBy('dt.district_name','ASC')
+        ->orderBy('up.upazila_name','ASC')
+        ->get();
+    }
+    /*
+        AppsUnionController
+    */
+    public static function getUnion($id){
+        return DB::table('apps_union as union')
+        ->leftJoin('apps_upazila as up', 'union.upazila_id', '=', 'up.upazila_id')
+        ->leftJoin('apps_district as dt', 'up.district_id', '=', 'dt.district_id')
+        ->leftJoin('apps_division as dv', 'dt.division_id', '=', 'dv.division_id')
+        ->leftJoin('apps_country as c', 'dv.country_id', '=', 'c.country_id')
+        ->leftJoin('mst_status as st', 'up.upazila_status', '=', 'st.status_id')
+        ->select('union.*','up.upazila_name','st.*','dt.district_name','dt.district_id','dv.division_name','dv.division_id','c.country_name','c.country_id') 
+        ->where('union.union_id','=',$id)
+        ->first();
+    }
     public static function getStatus(){
         return DB::table('mst_status')->get();
     }
@@ -99,4 +150,19 @@ class GetData extends Model
             ->where($column,'=',$id)
             ->first();
     }
+        /*
+    users of division_dependent($country)
+    Class Name: AppsData
+    */
+    public static function dependentDivision($country){
+        return DB::table('apps_division as d')
+        ->where([['d.division_status', '=',1],['country_id','=',$country]])
+        ->get();
+    }
+    public static function dependentDistrict($division){
+        return DB::table('apps_district as d')
+        ->where([['d.district_status', '=',1],['division_id','=',$division]])
+        ->get();
+    }
+
 }
