@@ -1,4 +1,4 @@
-@extends('users.layout')
+@extends('guest.layout')
 
 @section('slider')
 <div class="hero-wrap" style="background-image: url('{{asset('public/users/images/bg_1.jpg')}}');">

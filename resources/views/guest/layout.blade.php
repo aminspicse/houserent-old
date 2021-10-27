@@ -75,7 +75,7 @@
                                 @elseif(Auth::user()->role_id == '2')
                                 <a href="{{url('/agent')}}">Agent Pannel</a>
                                 @elseif(Auth::user()->role_id == '3')
-                                <a href="">User Pannel</a>
+                                <a href="{{url('/user')}}">User Pannel</a>
                                 @endif
                                 <a href="#">Link 1</a>
                                 <a href="#">Link 2</a>

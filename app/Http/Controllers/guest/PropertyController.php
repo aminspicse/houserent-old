@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\guest;
 
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use DB;
 class PropertyController extends Controller
@@ -14,7 +15,7 @@ class PropertyController extends Controller
     public function index()
     {
         $data['property'] = DB::table('posts')->orderBy('post_id','desc')->paginate(3);
-        return view('users.property',$data);
+        return view('guest.property',$data);
     }
 
     /**

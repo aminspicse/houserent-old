@@ -1,4 +1,4 @@
-@extends('users.layout')
+@extends('guest.layout')
 
 @section('title')
 	Home::{{config('app.name')}}
