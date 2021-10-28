@@ -1,10 +1,10 @@
 @extends('layouts.layout')
 
 @section('title')
-    Inactivated Post
+    MyPost
 @endsection
 @section('content_title')
-<h2>Inactivated Post</h2>
+<h2>My Post</h2>
 <ul class="nav navbar-right panel_toolbox">
     
 </ul>
@@ -25,14 +25,15 @@
     <tbody>
         <?php $i=1;?>
         @foreach($post as $post)
-        </tr>
+        <tr>
             <th>{{$i}}</th>
             <th>{{$post->post_id}}</th>
-            <th><a href="{{url('admin/view-post').'/'.$post->post_id}}">{{$post->title}}</a></th>
+            <th><a href="{{url('post').'/'.$post->post_id}}">{{$post->title}}</a></th>
             <th>{{$post->address}}</th>
             <th>
-               <a href="{{url('admin/change-status').'/'.$post->post_id}}/1">Active</a>
-               <a href="{{url('admin/change-status').'/'.$post->post_id}}/2">Pending</a>
+               <a href="{{url('post').'/'.$post->post_id}}/edit" class="">Edit</a>
+               <a href="{{url('admin/change-status').'/'.$post->post_id}}/0" class="">Inactive</a>
+               <a href="{{url('admin/change-status').'/'.$post->post_id}}/3" class="">Delete</a>
             </th>
         </tr>
         @endforeach

@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use DB;
+use Auth;
 class GetData extends Model
 {
     use HasFactory;
@@ -180,6 +181,18 @@ class GetData extends Model
 
     public static function allPostType(){
         return DB::table('mst_post_type')->get();
+    }
+
+    public static function myPost(){
+        return DB::table('post_view')
+        ->where('user_id','=',Auth::user()->id)
+        ->get();
+    }
+    public static function getmyPost($id)
+    {
+        return DB::table('post_view')
+        ->where([['post_id','=',$id],['user_id','=',Auth::user()->id]])
+        ->first();
     }
 
     public static function fetchById($table,$column,$id){

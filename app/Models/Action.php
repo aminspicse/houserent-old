@@ -37,7 +37,7 @@ class Action extends Model
         
     }
 
-    public static function makeActive($data){
+    public static function statusChange($data){
         $table      = $data['table'];
         $where      = $data['where'];
         $value      = $data['value'];
@@ -47,9 +47,8 @@ class Action extends Model
         $st = DB::table($table)->where($where,'=',$value)->first();
 
             DB::table($table)->where($where,'=', $value)
-                    ->limit(1)
-                    ->update(array($status => $status_id));
-                    return $st->$column;
-        
+                ->limit(1)
+                ->update(array($status => $status_id));
+                return $st->$column;
     }
 }

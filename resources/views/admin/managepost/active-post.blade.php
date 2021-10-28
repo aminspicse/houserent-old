@@ -28,10 +28,9 @@
         <tr>
             <th>{{$i}}</th>
             <th>{{$post->post_id}}</th>
-            <th>{{$post->title}}</th>
+            <th><a href="{{url('admin/view-post').'/'.$post->post_id}}">{{$post->title}}</a></th>
             <th>{{$post->address}}</th>
             <th>
-               <a href="" class="">View</a>
                <a href="{{url('admin/change-status').'/'.$post->post_id}}/2" class="">Pending</a>
                <a href="{{url('admin/change-status').'/'.$post->post_id}}/0" class="">Inactive</a>
             </th>

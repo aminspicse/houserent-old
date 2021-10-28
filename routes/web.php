@@ -63,6 +63,7 @@ Route::group(['prefix' => 'admin','middleware' => ['auth', 'verified','admin']],
 	Route::get('/active-post',[ManagePostController::class,'activepost']);
 	Route::get('/inactive-post',[ManagePostController::class,'inactivePost']);
 	Route::get('/pending-post',[ManagePostController::class,'pendingPost']);
+	Route::get('/view-post/{id}',[ManagePostController::class,'viewPost']);
 	Route::get('/change-status/{post_id}/{status_id}',[ManagePostController::class,'changeStatus']);
 });
 

@@ -19,7 +19,8 @@ class PostController extends Controller
      */
     public function index()
     {
-        // 
+        $data['post'] = GetData::myPost();
+        return view('post.index',$data);
     }
 
     /**
@@ -106,7 +107,8 @@ class PostController extends Controller
      */
     public function show($id)
     {
-        //
+        $data['posts'] = GetData::getmyPost($id);
+        return view('post.view',$data);
     }
 
     /**

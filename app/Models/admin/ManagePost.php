@@ -26,4 +26,11 @@ class ManagePost extends Model
         ->orderBy('post_id','desc')
         ->get();
     }
+
+    public static function getPost($id)
+    {
+        return DB::table('post_view')
+        ->where('post_id','=',$id)
+        ->first();
+    }
 }

@@ -30,6 +30,11 @@ class ManagePostController extends Controller
         return view('admin.managepost.pending-post',$data);
     }
 
+    public function viewPost($id)
+    {
+        $data['posts']   = ManagePost::getPost($id);
+        return view('admin.managepost.view-post',$data);
+    }
     public function changeStatus($post_id,$status_id)
     {
         //return URL::previous();
@@ -42,17 +47,17 @@ class ManagePostController extends Controller
         
         if($status_id == 1)
         {
-            $result     = Action::makeActive($data);
+            $result     = Action::statusChange($data);
             return redirect(URL::previous())->with('success',$result.' Post Activated');
         }
         elseif($status_id == 2)
         {
-            $result     = Action::makeActive($data);
+            $result     = Action::statusChange($data);
             return redirect(URL::previous())->with('info',$result.' Post Pending');
         }
         elseif($status_id == 0)
         {
-            $result     = Action::makeActive($data);
+            $result     = Action::statusChange($data);
             return redirect(URL::previous())->with('danger',$result.' Post Pending');
         }
     }
