@@ -2,7 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 
-use App\Http\Controllers\admin\CreatePost;
+
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\AppsData;
 
@@ -16,6 +16,9 @@ use App\Http\Controllers\mst\AppsDivisionController;
 use App\Http\Controllers\mst\AppsDistrictController;
 use App\Http\Controllers\mst\AppsUpazilaController;
 use App\Http\Controllers\mst\AppsUnionController;
+use App\Http\Controllers\mst\PropertyTypeController;
+use App\Http\Controllers\mst\PropertyForController;
+use App\Http\Controllers\admin\ManagePostController;
 
 // Admin
 use App\Http\Controllers\admin\AdminDashboardController;
@@ -26,7 +29,8 @@ use App\Http\Controllers\agent\AgentDashboardController;
 // User
 use App\Http\Controllers\user\UserDashboardController;
 
-
+// common access controller
+use App\Http\Controllers\post\PostController;
 
 Route::get('/',[HomeController::class,'index']);
 Route::get('/home',[HomeController::class,'index']);
@@ -44,8 +48,8 @@ Auth::routes(['verify' => true]);
 
 Route::group(['prefix' => 'admin','middleware' => ['auth', 'verified','admin']], function() {
 	Route::get('/', [AdminDashboardController::class, 'dashboard'])->name('dashboard');
-    Route::get('/create',[CreatePost::class,'index'])->name('create');
-    Route::post('/post/store',[CreatePost::class,'store']);
+    //Route::get('/create',[CreatePost::class,'index'])->name('create');
+    //Route::post('/post/store',[CreatePost::class,'store']);
 
 	// COuntry
 	Route::resource('/country',AppsCountryController::class);
@@ -53,23 +57,34 @@ Route::group(['prefix' => 'admin','middleware' => ['auth', 'verified','admin']],
 	Route::resource('/district',AppsDistrictController::class);
 	Route::resource('/upazila',AppsUpazilaController::class);
 	Route::resource('/union',AppsUnionController::class);
+	Route::resource('/property-type',PropertyTypeController::class);
+	Route::resource('/property-for',PropertyForController::class);
+	
+	Route::get('/active-post',[ManagePostController::class,'activepost']);
+	Route::get('/inactive-post',[ManagePostController::class,'inactivePost']);
+	Route::get('/pending-post',[ManagePostController::class,'pendingPost']);
+	Route::get('/change-status/{post_id}/{status_id}',[ManagePostController::class,'changeStatus']);
 });
 
 
 Route::group(['prefix' => 'agent','middleware' => ['auth', 'verified','agent']], function() {
 	Route::get('/', [AgentDashboardController::class, 'dashboard'])->name('dashboard');
-    Route::get('/create',[CreatePost::class,'index'])->name('create');
-	//Route::get('/getdivision/{id}', [CreatePost::class,'getdivision']);
-    Route::post('/post/store',[CreatePost::class,'store']);
-
+	//Route::resource('/post',PostController::class);
+    
 });
 
 Route::group(['prefix' => 'user','middleware' => ['auth', 'verified','user']], function() {
 	Route::get('/',[UserDashboardController::class,'dashboard']);
+	//Route::resource('/post',PostController::class);
+});
+
+// common access user, agent and admin
+Route::group(['middleware' => ['auth', 'verified']], function() {
+    Route::resource('/post',PostController::class);
+
 });
 
 
-Route::get('/create',[CreatePost::class,'index']);
 Route::post('/getdivision', [AppsData::class,'getDivision']);
 Route::post('/getdistrict', [AppsData::class,'getDistrict']);
 Route::post('/getthana', [AppsData::class,'getThana']);

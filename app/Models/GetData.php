@@ -145,6 +145,43 @@ class GetData extends Model
         return DB::table('mst_status')->get();
     }
 
+    public static function allPropertyType(){
+        return DB::table('mst_property_type')->get();
+    }
+    public static function activePropertyType(){
+        return DB::table('mst_property_type')
+        ->where('property_type_status','=',1)
+        ->get();
+    }
+    public static function getPropertyType($id){
+        return DB::table('mst_property_type as mpt')
+            ->leftJoin('mst_status as st', 'mpt.property_type_status','=','st.status_id')
+            ->where('mpt.property_type_id',$id)
+            ->select('mpt.*', 'st.status_name')
+            ->first();
+    }
+
+    public static function allPropertyFor(){
+        return DB::table('mst_property_for')->get();
+    }
+    public static function activePropertyFor(){
+        return DB::table('mst_property_for')
+        ->where('for_status','=',1)
+        ->get();
+    }
+
+    public static function getPropertyFor($id){
+        return DB::table('mst_property_for as mpf')
+            ->leftJoin('mst_status as st', 'mpf.for_status','=','st.status_id')
+            ->where('mpf.for_id',$id)
+            ->select('mpf.*', 'st.status_name')
+            ->first();
+    }
+
+    public static function allPostType(){
+        return DB::table('mst_post_type')->get();
+    }
+
     public static function fetchById($table,$column,$id){
         return DB::table($table)
             ->where($column,'=',$id)

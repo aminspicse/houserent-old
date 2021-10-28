@@ -36,4 +36,20 @@ class Action extends Model
         }
         
     }
+
+    public static function makeActive($data){
+        $table      = $data['table'];
+        $where      = $data['where'];
+        $value      = $data['value'];
+        $column     = $data['column'];
+        $status     = $data['status'];
+        $status_id  = $data['status_id'];
+        $st = DB::table($table)->where($where,'=',$value)->first();
+
+            DB::table($table)->where($where,'=', $value)
+                    ->limit(1)
+                    ->update(array($status => $status_id));
+                    return $st->$column;
+        
+    }
 }

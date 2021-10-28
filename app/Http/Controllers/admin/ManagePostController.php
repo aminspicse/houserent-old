@@ -1,0 +1,59 @@
+<?php
+
+namespace App\Http\Controllers\admin;
+
+use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
+use App\Models\Post;
+use App\Models\GetData;
+use App\Models\Action;
+use App\Models\admin\ManagePost;
+use Redirect,Response;
+use Auth;
+use DB;
+use URL;
+class ManagePostController extends Controller
+{
+    public function activepost()
+    {
+        $data['post'] = ManagePost::allPosts(1);
+        return view('admin.managepost.active-post',$data);
+    }
+    public function inactivePost()
+    {
+        $data['post'] = ManagePost::allPosts(0);
+        return view('admin.managepost.inactive-post',$data);
+    }
+    public function pendingPost()
+    {
+        $data['post'] = ManagePost::allPosts(2);
+        return view('admin.managepost.pending-post',$data);
+    }
+
+    public function changeStatus($post_id,$status_id)
+    {
+        //return URL::previous();
+        $data['table']      = 'posts';
+        $data['where']      = 'post_id';
+        $data['value']      = $post_id;
+        $data['column']     = 'title';
+        $data['status']     = 'post_status';
+        $data['status_id']  = $status_id;
+        
+        if($status_id == 1)
+        {
+            $result     = Action::makeActive($data);
+            return redirect(URL::previous())->with('success',$result.' Post Activated');
+        }
+        elseif($status_id == 2)
+        {
+            $result     = Action::makeActive($data);
+            return redirect(URL::previous())->with('info',$result.' Post Pending');
+        }
+        elseif($status_id == 0)
+        {
+            $result     = Action::makeActive($data);
+            return redirect(URL::previous())->with('danger',$result.' Post Pending');
+        }
+    }
+}

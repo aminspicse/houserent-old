@@ -8,7 +8,10 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>{{ config('app.name', 'HRentSolution') }}</title>
+    <title>
+        @yield('title'):
+        {{ config('app.name', 'HRentSolution') }}
+    </title>
 
  <!-- Bootstrap -->
     <link href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css">
@@ -73,28 +76,33 @@
                                             <li><a href="{{url('/admin/district')}}">District</a></li>
                                             <li><a href="{{url('/admin/upazila')}}">Upazila</a></li>
                                             <li><a href="{{url('/admin/union')}}">Union</a></li>
+                                            <li><a href="{{url('/admin/property-type')}}">Property Type</a></li>
+                                            <li><a href="{{url('/admin/property-for')}}">Property For</a></li>
                                         </ul>
                                     </li>
-                                    <li><a><i class="fa fa-home"></i> Home <span class="fa fa-chevron-down"></span></a>
+                                    <li><a><i class="fa fa-edit"></i> Manage Post <span class="fa fa-chevron-down"></span></a>
                                         <ul class="nav child_menu">
-                                            <li><a href="{{url('/admin/create')}}">Create Post</a></li>
+                                            <li><a href="{{url('/admin/pending-post')}}">Pending Post</a></li>
+                                            <li><a href="{{url('/admin/active-post')}}">Active Post</a></li>
+                                            <li><a href="{{url('/admin/inactive-post')}}">Inactive Post</a></li>
+                                        </ul>
+                                    </li>
+                                    <li><a><i class="fa fa-home"></i> Posts <span class="fa fa-chevron-down"></span></a>
+                                        <ul class="nav child_menu">
+                                            <li><a href="{{url('post/create')}}">Create Post</a></li>
                                             <li><a href="{{url('/admin/profile-pic')}}">Dashboard2</a></li>
                                             <li><a href="index3.html">Dashboard3</a></li>
                                         </ul>
                                     </li>
-                                    <li><a><i class="fa fa-edit"></i> Forms <span class="fa fa-chevron-down"></span></a>
-                                        <ul class="nav child_menu">
-                                            <li><a href="{{url('/admin/profile-pic-change')}}">General Form</a></li>
-                                        </ul>
-                                    </li>
+                                    
                                 </ul>
                             @elseif(Auth::user()->role_id == 2)
                                 <!-- Agent Option -->
                                 <h3>Agent</h3>
                                 <ul class="nav side-menu">
-                                    <li><a><i class="fa fa-home"></i> Home <span class="fa fa-chevron-down"></span></a>
+                                    <li><a><i class="fa fa-home"></i> Post <span class="fa fa-chevron-down"></span></a>
                                         <ul class="nav child_menu">
-                                            <li><a href="{{url('/agent/create')}}">Create Post</a></li>
+                                            <li><a href="{{url('/post/create')}}">Create Post</a></li>
                                             <li><a href="{{url('/admin/profile-pic-change')}}">Dashboard2</a></li>
                                             <li><a href="{{url('/')}}">Dashboard3</a></li>
                                         </ul>
@@ -111,7 +119,7 @@
                                 <ul class="nav side-menu">
                                     <li><a><i class="fa fa-home"></i> Posts <span class="fa fa-chevron-down"></span></a>
                                         <ul class="nav child_menu">
-                                            <li><a href="{{url('/user/create')}}">Create Post</a></li>
+                                            <li><a href="{{url('/post/create')}}">Create Post</a></li>
                                             <li><a href="{{url('/admin/profile-pic-change')}}">Dashboard2</a></li>
                                             <li><a href="{{url('/')}}">Dashboard3</a></li>
                                         </ul>
