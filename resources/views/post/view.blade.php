@@ -26,7 +26,7 @@
         </tr>
         <tr>
             <td>Posted By</td>
-            <td colspan="7">{{$posts->user_name.' - '.$posts->user_id}}</td>
+            <td colspan="7">{{$posts->user_name.' - '.$posts->user_email.' - '.$posts->user_id}}</td>
         </tr>
         <tr>
             <td>Size:</td>
@@ -69,6 +69,8 @@
             <td>{{$posts->updated_at}}</td>
         </tr>
         <tr>
+            <td>Price: </td>
+            <td>{{$posts->price}}</td>
             <td>Post Status: </td>
             <td>{{$posts->status_name}}</td>
             
@@ -83,9 +85,11 @@
             </td>
         </tr>
         <tr>
-            <td>
-                <iframe width="100%"
-                src="{{$posts->video}}">
+            <td colspan="8">
+                <iframe width="100%" height="400px"
+                allow="accelerometer; autoplay; 
+                clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen
+                src="{{$posts->video}}" frame-border="0">
                 </iframe> 
             </td>
         </tr>

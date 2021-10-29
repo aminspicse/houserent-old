@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Post;
 use App\Models\GetData;
+use App\Models\Action;
 use Redirect,Response;
 use Auth;
 use DB;
@@ -45,7 +46,7 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-       // return $request->all();
+        //return $request->all();
         $request->validate([
             'title'         => ['required'],
             'country_id'    => ['required','numeric'],
@@ -55,6 +56,7 @@ class PostController extends Controller
             'union_id'      => ['required','numeric'],
             'property_type' => ['required','numeric'],
             'add_for'       => ['required','numeric'],
+            'price'         => ['required'],
             'address'       => ['required'],
             'area'          => ['required'],
             'nm_bedroom'    => ['required'],
@@ -92,11 +94,12 @@ class PostController extends Controller
             'post_type'     => 2,
             'property_type' => $request->property_type,
             'property_for'  => $request->add_for,
+            'price'         => $request->price,
             'post_status'   => 0
 
         ]);
 
-        return $request->title;
+        return redirect(url('post/'))->with('success','Successfully Created New Post');
     }
 
     /**
@@ -107,8 +110,15 @@ class PostController extends Controller
      */
     public function show($id)
     {
-        $data['posts'] = GetData::getmyPost($id);
-        return view('post.view',$data);
+        $data['posts'] = GetData::getmyPost($id,Auth::user()->id);
+
+        if($data['posts']){
+            return view('post.view',$data);
+        }else{
+            $data['url'] = url('post');
+            return view('post.not-found',$data);
+        }
+        
     }
 
     /**
@@ -119,7 +129,18 @@ class PostController extends Controller
      */
     public function edit($id)
     {
-        //
+        $data['country'] = GetData::activatedCountry();
+        $data['postType'] = GetData::allPostType();
+        $data['propertyType'] = GetData::activePropertyType();
+        $data['propertyFor'] = GetData::activePropertyFor();
+        $data['post'] = GetData::getmyPost($id,Auth::user()->id);
+
+        if($data['post']){
+            return view('post.edit',$data);
+        }else{
+            $data['url'] = url('post');
+            return view('post.not-found',$data);
+        }
     }
 
     /**
@@ -131,7 +152,59 @@ class PostController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        //return $request->all();
+        $request->validate([
+            'title'         => ['required'],
+            'country_id'    => ['required','numeric'],
+            'division_id'   => ['required','numeric'],
+            'district_id'   => ['required','numeric'],
+            'upazila_id'    => ['required','numeric'],
+            'union_id'      => ['required','numeric'],
+            'property_type' => ['required','numeric'],
+            'add_for'       => ['required','numeric'],
+            'price'         => ['required'],
+            'address'       => ['required'],
+            'area'          => ['required'],
+            'nm_bedroom'    => ['required'],
+            'details'       => ['required'],
+        ],
+        [
+            'country_id.numeric'    => 'Country Name Required',
+            'division_id.numeric'   => 'Division/State Name Required',
+            'district_id.numeric'   => 'District Name Required',
+            'upazila_id.numeric'    => 'Upazila Name Required',
+            'union_id.numeric'      => 'Unon Name Required',
+            'property_type.numeric' => 'Property/House Type Required ',
+            'add_for.numeric'       => 'Add For Type Required '
+        ]);
+        //$filename = $request->photo->store('public/image');
+        //$imagelink = substr($filename, 12);
+        Post::where('post_id','=',$id)
+        ->update([
+            'title'         => $request->title,
+            'address'       => $request->address,
+            'area'          => $request->area,
+            'nm_bedroom'    => $request->nm_bedroom,
+            'nm_bathroom'   => $request->nm_bathroom,
+            'nm_garage'     => $request->nm_garage,
+            'details'       => $request->details,
+            'video'         => $request->video,
+            'country_id'    => $request->country_id,
+            'division_id'   => $request->division_id,
+            'district_id'   => $request->district_id,
+            'upazila_id'    => $request->upazila_id,
+            'union_id'      => $request->union_id,
+            'approved_by'   => null,
+            'post_type'     => 2,
+            'property_type' => $request->property_type,
+            'property_for'  => $request->add_for,
+            'price'         => $request->price,
+            'post_status'   => 0
+
+        ]);
+
+        return redirect(url('post/'))->with('info',$request->title.' Updated Successfully');
+   
     }
 
     /**
@@ -142,6 +215,26 @@ class PostController extends Controller
      */
     public function destroy($id)
     {
-        //
+
+    }
+
+    public function deletePost($post_id)
+    {
+        $data['table']      = 'posts';
+        $data['where']      = 'post_id';
+        $data['value']      = $post_id;
+        $data['column']     = 'title';
+        $data['status']     = 'post_status';
+        $data['status_id']  = 3;
+
+        $check['posts'] = GetData::getmyPost($post_id,Auth::user()->id);
+
+        if($check['posts']){
+            $result     = Action::statusChange($data);
+            return redirect(url('post/'))->with('danger',$result.' Post Deleted');
+        }else{
+            $data['url'] = url('post');
+            return view('post.not-found',$data);
+        }
     }
 }

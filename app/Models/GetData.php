@@ -185,13 +185,14 @@ class GetData extends Model
 
     public static function myPost(){
         return DB::table('post_view')
-        ->where('user_id','=',Auth::user()->id)
+        ->where([['user_id','=',Auth::user()->id],['post_status','!=',3]])
+        ->orderBy('post_id','DESC')
         ->get();
     }
-    public static function getmyPost($id)
+    public static function getmyPost($post_id,$auth_id)
     {
         return DB::table('post_view')
-        ->where([['post_id','=',$id],['user_id','=',Auth::user()->id]])
+        ->where([['post_id','=',$post_id],['user_id','=',$auth_id]])
         ->first();
     }
 

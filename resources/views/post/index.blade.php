@@ -12,28 +12,26 @@
 @section('content')
 
 @include('flash-message')
-<table id="datatable-buttons" class="table table-striped table-bordered dataTable no-footer dtr-inline" style="width: 100%;" role="grid" aria-describedby="datatable-buttons_info">
+<table id="datatable" class="table table-striped table-bordered"  role="grid" aria-describedby="datatable-buttons_info">
     <thead>
         <tr>
-            <th>SL</th>
             <th>ID</th>
             <th>Title</th>
             <th>Address</th>
+            <th>Status</th>
             <th>Action</th>
         </tr>
     </thead>
     <tbody>
-        <?php $i=1;?>
         @foreach($post as $post)
         <tr>
-            <th>{{$i}}</th>
             <th>{{$post->post_id}}</th>
             <th><a href="{{url('post').'/'.$post->post_id}}">{{$post->title}}</a></th>
             <th>{{$post->address}}</th>
+            <th><span>{{$post->status_name}}</span></th>
             <th>
                <a href="{{url('post').'/'.$post->post_id}}/edit" class="">Edit</a>
-               <a href="{{url('admin/change-status').'/'.$post->post_id}}/0" class="">Inactive</a>
-               <a href="{{url('admin/change-status').'/'.$post->post_id}}/3" class="">Delete</a>
+               <a href="{{url('/post/delete').'/'.$post->post_id}}" class="">Delete</a>
             </th>
         </tr>
         @endforeach

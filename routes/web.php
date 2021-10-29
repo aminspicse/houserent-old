@@ -82,6 +82,7 @@ Route::group(['prefix' => 'user','middleware' => ['auth', 'verified','user']], f
 // common access user, agent and admin
 Route::group(['middleware' => ['auth', 'verified']], function() {
     Route::resource('/post',PostController::class);
+	Route::get('/post/delete/{id}',[PostController::class, 'deletePost']);
 
 });
 
