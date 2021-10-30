@@ -4,6 +4,8 @@ namespace App\Http\Controllers\guest;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\guest\Home;
+use App\Models\GetData;
 use Auth;
 use DB;
 class HomeController extends Controller
@@ -15,11 +17,14 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $data['slider'] = DB::table('posts')->orderBy('post_id','desc')->take(5)->get();
-        $data['recent'] = DB::table('posts')->orderBy('post_id', 'desc')->take(10)->get();
-        $data['recomanded'] = DB::table('posts')->orderBy('post_id', 'desc')->take(4)->get();
+        //return Home::TopPost();
+        $data['toppost'] = Home::TopPost();//DB::table('posts')->orderBy('post_id','desc')->take(5)->get();
+        $data['recent'] = Home::RecentPost();//DB::table('posts')->orderBy('post_id', 'desc')->take(10)->get();
+        $data['recomanded'] = Home::RecommendedPost();//DB::table('post_view')->orderBy('post_id', 'desc')->take(4)->get();
         return view('guest.home',$data);
     }
+
+    
 
     /**
      * Show the form for creating a new resource.
@@ -50,7 +55,10 @@ class HomeController extends Controller
      */
     public function show($id)
     {
-        //
+        $data['post'] = GetData::getPost($id,1);
+        $data['recent'] = DB::table('posts')->orderBy('post_id', 'desc')->take(10)->get();
+        $data['recomanded'] = DB::table('posts')->orderBy('post_id', 'desc')->take(4)->get();
+        return view('guest.propertysingle',$data);
     }
 
     /**

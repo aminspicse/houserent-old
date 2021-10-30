@@ -15,7 +15,6 @@
 <table id="datatable-buttons" class="table table-striped table-bordered dataTable no-footer dtr-inline" style="width: 100%;" role="grid" aria-describedby="datatable-buttons_info">
     <thead>
         <tr>
-            <th>SL</th>
             <th>ID</th>
             <th>Title</th>
             <th>Address</th>
@@ -23,10 +22,8 @@
         </tr>
     </thead>
     <tbody>
-        <?php $i=1;?>
         @foreach($post as $post)
         <tr>
-            <th>{{$i}}</th>
             <th>{{$post->post_id}}</th>
             <th><a href="{{url('admin/view-post').'/'.$post->post_id}}">{{$post->title}}</a></th>
             <th>{{$post->address}}</th>

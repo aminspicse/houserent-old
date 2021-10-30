@@ -37,9 +37,7 @@ Route::get('/home',[HomeController::class,'index']);
 
 Route::get('/property',[PropertyController::class,'index']);
 
-Route::get('/property-single', function () {
-    return view('guest.propertysingle');
-});
+Route::get('/property-single/{id}',[HomeController::class, 'show']);
 
 
 Auth::routes();

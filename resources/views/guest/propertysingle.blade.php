@@ -29,9 +29,10 @@
                         <div class="single-slider owl-carousel">
                             <div class="item">
                                 <div class="properties-img"
-                                    style="background-image: url({{asset('public/users/images/properties-1.jpg')}});">
+                                    style="background-image: url({{url('public/storage/image').$post->image}});">
                                 </div>
                             </div>
+                            <!--
                             <div class="item">
                                 <div class="properties-img"
                                     style="background-image: url({{asset('public/users/images/properties-2.jpg')}});">
@@ -42,30 +43,29 @@
                                     style="background-image: url({{asset('public/users/images/properties-3.jpg')}});">
                                 </div>
                             </div>
+                            -->
                         </div>
                     </div>
                     <div class="col-md-12 Properties-single mt-4 mb-5 ftco-animate">
-                        <h2>Crowne Plaza Columbus</h2>
+                        <h2>{{$post->title}}</h2>
                         <p class="rate mb-4">
-                            <span class="loc"><a href="#"><i class="icon-map"></i> 291 South 21th Street, Suite 721 New
-                                    York NY 10016</a></span>
+                            <span class="loc"><a href="#"><i class="icon-map"></i>{{$post->address}}</a></span>
                         </p>
-                        <p>When she reached the first hills of the Italic Mountains, she had a last view back on the
-                            skyline of her hometown Bookmarksgrove, the headline of Alphabet Village and the subline of
-                            her own road, the Line Lane. Pityful a rethoric question ran over her cheek, then she
-                            continued her way.</p>
+                        <p>{{$post->details}}</p>
                         <div class="d-md-flex mt-5 mb-5">
                             <ul>
-                                <li><span>Lot Area: </span> 1,250 SQ FT</li>
-                                <li><span>Bed Rooms: </span> 4</li>
-                                <li><span>Bath Rooms: </span> 4</li>
-                                <li><span>2 Garage: </span> 4</li>
+                                <li><span>Lot Area: </span>{{$post->area}}</li>
+                                <li><span>Bed Rooms: </span>{{$post->nm_bedroom}}</li>
+                                <li><span>Bath Rooms: </span> {{$post->nm_bathroom}}</li>
+                                <li><span>2 Garage: </span>{{$post->nm_garage}}</li>
                             </ul>
                             <ul class="ml-md-5">
+                                <!--
                                 <li><span>Floor Area: </span> 1,300 SQ FT</li>
                                 <li><span>Year Build:: </span> 2018</li>
                                 <li><span>Stories: </span> 1</li>
                                 <li><span>Roofing: </span> New</li>
+                                -->
                             </ul>
                         </div>
                         <p>When she reached the first hills of the Italic Mountains, she had a last view back on the

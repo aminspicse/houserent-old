@@ -72,6 +72,15 @@ class PostController extends Controller
             'property_type.numeric' => 'Property/House Type Required ',
             'add_for.numeric'       => 'Add For Type Required '
         ]);
+
+        if(is_numeric($request->price)){
+            $price = number_format($request->price);
+        }
+        else
+        {
+            $price = $request->$price;
+        }
+
         $filename = $request->photo->store('public/image');
         $imagelink = substr($filename, 12);
         Post::create([
@@ -94,7 +103,7 @@ class PostController extends Controller
             'post_type'     => 2,
             'property_type' => $request->property_type,
             'property_for'  => $request->add_for,
-            'price'         => $request->price,
+            'price'         => $price,
             'post_status'   => 0
 
         ]);
@@ -177,6 +186,15 @@ class PostController extends Controller
             'property_type.numeric' => 'Property/House Type Required ',
             'add_for.numeric'       => 'Add For Type Required '
         ]);
+
+        if(is_numeric($request->price)){
+            $price = number_format($request->price);
+        }
+        else
+        {
+            $price = $request->$price;
+        }
+
         //$filename = $request->photo->store('public/image');
         //$imagelink = substr($filename, 12);
         Post::where('post_id','=',$id)
@@ -198,7 +216,7 @@ class PostController extends Controller
             'post_type'     => 2,
             'property_type' => $request->property_type,
             'property_for'  => $request->add_for,
-            'price'         => $request->price,
+            'price'         => $price,
             'post_status'   => 0
 
         ]);

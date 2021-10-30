@@ -195,6 +195,12 @@ class GetData extends Model
         ->where([['post_id','=',$post_id],['user_id','=',$auth_id]])
         ->first();
     }
+    public static function getPost($post_id,$status)
+    {
+        return DB::table('post_view')
+        ->where([['post_id','=',$post_id],['post_status','=',$status]])
+        ->first();
+    }
 
     public static function fetchById($table,$column,$id){
         return DB::table($table)

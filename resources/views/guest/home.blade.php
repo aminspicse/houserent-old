@@ -5,7 +5,7 @@
 @endsection
 @section('slider')
 <section class="home-slider owl-carousel">
-    @foreach($slider as $slid)
+    @foreach($toppost as $slid)
     <div class="slider-item" style="background-image:url({{url('public/storage/image'.$slid->image)}})">
         <div class="overlay"></div>
         <div class="container">
@@ -13,31 +13,15 @@
                 <div class="col-md-6 text p-4 ftco-animate">
                     <h1 class="mb-3">{{$slid->title}}</h1>
                     <span class="location d-block mb-3"><i class="icon-my_location"></i> {{$slid->address}}</span>
-                    <p>{{$slid->details}}</p>
-                    <span class="price">$28,000</span>
-                    <a href="#" class="btn-custom p-3 px-4 bg-primary">View Details <span
+                    <p>{{substr($slid->details,0,200)}}</p>
+                    <span class="price">{{$slid->currency_symbol.''.number_format($slid->price)}}</span>
+                    <a href="{{url('property-single'.'/'.$slid->post_id)}}" class="btn-custom p-3 px-4 bg-primary">View Details <span
                             class="icon-plus ml-1"></span></a>
                 </div>
             </div>
         </div>
     </div>
     @endforeach
-    <!--
-      <div class="slider-item" style="background-image:url({{asset('public/users/images/bg_2.jpg')}});">
-      	<div class="overlay"></div>
-        <div class="container">
-          <div class="row no-gutters slider-text align-items-md-end align-items-center justify-content-end">
-          <div class="col-md-6 text p-4 ftco-animate">
-            <h1 class="mb-3">3015 Grand Avenue, CocoWalk</h1>
-            <span class="location d-block mb-3"><i class="icon-my_location"></i> Melbourne, Vic 3004</span>
-            <p>A small river named Duden flows by their place and supplies it with the necessary regelialia. It is a paradisematic country, in which roasted parts of sentences fly into your mouth.</p>
-            <span class="price">$28,000</span>
-            <a href="#" class="btn-custom p-3 px-4 bg-primary">View Details <span class="icon-plus ml-1"></span></a>
-          </div>
-        </div>
-        </div>
-      </div>
--->
 </section>
 @endsection
 
@@ -113,14 +97,14 @@
                                 </div>
                             </a>
                             <div class="text p-3">
-                                <span class="status sale">Sale</span>
+                                <span class="status sale">{{$rc->property_for_name}}</span>
                                 <div class="d-flex">
                                     <div class="one">
-                                        <h3><a href="#"> {{substr($rc->title,0,24)}}.. </a></h3>
-                                        <p>Apartment</p>
+                                        <h3><a href="{{url('property-single'.'/'.$rc->post_id)}}"> {{substr($rc->title,0,24)}}.. </a></h3>
+                                        <p>{{$rc->property_type_name}}</p>
                                     </div>
                                     <div class="two">
-                                        <span class="price">$20,000</span>
+                                        <span class="price">{{$rc->currency_symbol.number_format($rc->price)}}</span>
                                     </div>
                                 </div>
                             </div>
@@ -137,7 +121,7 @@
     <div class="container">
         <div class="row justify-content-center mb-5 pb-3">
             <div class="col-md-7 heading-section text-center ftco-animate">
-                <span class="subheading">Special Offers</span>
+                <!-- <span class="subheading">Special Offers</span> -->
                 <h2 class="mb-4">Most Recommended Properties</h2>
             </div>
         </div>
@@ -158,17 +142,17 @@
                         <span class="status sale">Sale</span>
                         <div class="d-flex">
                             <div class="one">
-                                <h3><a href="#">{{$rec->title}}</a></h3>
-                                <p>Apartment</p>
+                                <h3><a href="{{url('property-single'.'/'.$rec->post_id)}}">{{substr($rec->title,0,18)}}..</a></h3>
+                                <p>{{$rec->property_type_name}}</p>
                             </div>
                             <div class="two">
-                                <span class="price">$20,000</span>
+                                <span class="price">{{$rec->currency_symbol.number_format($rec->price)}}</span>
                             </div>
                         </div>
-                        <p>Far far away, behind the word mountains, far from the countries</p>
+                        <p>{{substr($rec->details,0,65)}}...</p>
                         <hr>
                         <p class="bottom-area d-flex">
-                            <span><i class="flaticon-selection"></i> 250sqft</span>
+                            <span><i class="flaticon-selection"></i>{{$rec->area}}</span>
                             <span class="ml-auto"><i class="flaticon-bathtub"></i> 3</span>
                             <span><i class="flaticon-bed"></i> 4</span>
                         </p>
