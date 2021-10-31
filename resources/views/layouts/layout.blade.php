@@ -69,7 +69,7 @@
                                 <!-- Admin Option -->
                                 <h3>Admin</h3>
                                 <ul class="nav side-menu">
-                                    <li><a><i class="fa fa-database"></i> Dashboard <span class="fa fa-chevron-down"></span></a>
+                                    <li><a><i class="fa fa-dashboard"></i> Dashboard <span class="fa fa-chevron-down"></span></a>
                                         <ul class="nav child_menu">
                                             <li><a href="{{url('/admin/dashboard')}}">Dashboard</a></li>
                                         </ul>

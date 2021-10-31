@@ -35,6 +35,31 @@ class ManagePostController extends Controller
         $data['posts']   = ManagePost::getPost($id);
         return view('admin.managepost.view-post',$data);
     }
+
+    public function PostType($post_id,$post_type){
+        $data['table']      = 'posts';
+        $data['where']      = 'post_id';
+        $data['value']      = $post_id;
+        $data['column']     = 'title';
+        $data['status']     = 'post_type';
+        $data['status_id']  = $post_type;
+        
+        if($post_type == 1)
+        {
+            $result     = Action::statusChange($data);
+            return redirect(URL::previous())->with('success',$result.' Maked Top Post');
+        }
+        elseif($post_type == 2)
+        {
+            $result     = Action::statusChange($data);
+            return redirect(URL::previous())->with('success',$result.' Recent Post');
+        }
+        else
+        {
+            $data['url'] = url('active-post');
+            return view('error.error404',$data);
+        }
+    }
     public function changeStatus($post_id,$status_id)
     {
         //return URL::previous();
@@ -59,6 +84,11 @@ class ManagePostController extends Controller
         {
             $result     = Action::statusChange($data);
             return redirect(URL::previous())->with('danger',$result.' Post Pending');
+        }
+        else
+        {
+            $data['url'] = url('post');
+            return view('error.error404',$data);
         }
     }
 }

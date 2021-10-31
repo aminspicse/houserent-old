@@ -94,11 +94,12 @@
             <td colspan='8'>
                 
                 <iframe width="100%"
-                height="500%"
+                height="500px"
                 src="{{$posts->video}}">
                 </iframe> 
             </td>
         </tr>
+        
     </tbody>
 </table>
 @endsection

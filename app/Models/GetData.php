@@ -146,9 +146,11 @@ class GetData extends Model
         return DB::table('mst_status')->get();
     }
 
-    public static function allPropertyType(){
-        return DB::table('mst_property_type')->get();
+    public static function PropertyType(){
+        return DB::table('property_type_view')
+        ->get();
     }
+    
     public static function activePropertyType(){
         return DB::table('mst_property_type')
         ->where('property_type_status','=',1)

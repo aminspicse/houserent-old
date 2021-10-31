@@ -35,7 +35,6 @@ use App\Http\Controllers\ActivityController;
 
 Route::get('/',[HomeController::class,'index']);
 Route::get('/home',[HomeController::class,'index']);
-
 Route::get('/property',[PropertyController::class,'index']);
 
 Route::get('/property-single/{id}',[HomeController::class, 'show']);
@@ -59,6 +58,7 @@ Route::group(['prefix' => 'admin','middleware' => ['auth', 'verified','admin']],
 	Route::resource('/property-type',PropertyTypeController::class);
 	Route::resource('/property-for',PropertyForController::class);
 	
+	Route::get('/post-type/{post_id}/{type_id}',[ManagePostController::class,'PostType']);
 	Route::get('/active-post',[ManagePostController::class,'activepost']);
 	Route::get('/inactive-post',[ManagePostController::class,'inactivePost']);
 	Route::get('/pending-post',[ManagePostController::class,'pendingPost']);

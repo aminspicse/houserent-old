@@ -50,6 +50,7 @@
                         <h2>{{$post->title}}</h2>
                         <p class="rate mb-4">
                             <span class="loc"><a href="#"><i class="icon-map"></i>{{$post->address}}</a></span>
+                            <span class="loc"><a href="#"><i class=""></i>Post By: {{$post->user_name}}</a></span>
                         </p>
                         <p>{{$post->details}}</p>
                         <div class="d-md-flex mt-5 mb-5">
@@ -57,15 +58,16 @@
                                 <li><span>Lot Area: </span>{{$post->area}}</li>
                                 <li><span>Bed Rooms: </span>{{$post->nm_bedroom}}</li>
                                 <li><span>Bath Rooms: </span> {{$post->nm_bathroom}}</li>
-                                <li><span>2 Garage: </span>{{$post->nm_garage}}</li>
+                                <li><span>Garage: </span>{{$post->nm_garage}}</li>
+                                <li><span>Price: </span>{{$post->price}}</li>
                             </ul>
                             <ul class="ml-md-5">
-                                <!--
-                                <li><span>Floor Area: </span> 1,300 SQ FT</li>
-                                <li><span>Year Build:: </span> 2018</li>
+                                
+                                <li><span>Property For: </span> {{$post->property_for_name}}</li>
+                                <li><span>Property Type: </span> {{$post->property_type_name}}</li>
                                 <li><span>Stories: </span> 1</li>
                                 <li><span>Roofing: </span> New</li>
-                                -->
+                                
                             </ul>
                         </div>
                         <p>When she reached the first hills of the Italic Mountains, she had a last view back on the
@@ -75,14 +77,20 @@
                     </div>
                     <div class="col-md-12 properties-single ftco-animate mb-5 mt-4">
                         <h3 class="mb-4">Take A Tour</h3>
+                        <!--
                         <div class="block-16">
                             <figure>
                                 <img src="{{asset('public/users/images/properties-6.jpg')}}" alt="Image placeholder"
                                     class="img-fluid">
-                                <a href="https://vimeo.com/45830194" class="play-button popup-vimeo"><span
+                                <a href="https://www.youtube.com/watch?v=33b6VZuvHF0" class="play-button popup-vimeo"><span
                                         class="icon-play"></span></a>
                             </figure>
                         </div>
+                        -->
+                        <iframe width="100%"
+                        height="500px"
+                        src="{{$post->video}}">
+                        </iframe> 
                     </div>
 
                     <div class="col-md-12 properties-single ftco-animate mb-5 mt-4">
@@ -214,56 +222,29 @@
                 <div class="sidebar-box ftco-animate">
                     <div class="categories">
                         <h3>Categories</h3>
-                        <li><a href="#">Properties <span>(12)</span></a></li>
-                        <li><a href="#">Home <span>(22)</span></a></li>
-                        <li><a href="#">House <span>(37)</span></a></li>
-                        <li><a href="#">Villa <span>(42)</span></a></li>
-                        <li><a href="#">Apartment <span>(14)</span></a></li>
-                        <li><a href="#">Condominium <span>(140)</span></a></li>
+                        @foreach($property_type as $category)
+                            <li><a href="#">{{$category->property_type_name}} <span>({{$category->total_active}})</span></a></li>
+                        @endforeach
+                        
                     </div>
                 </div>
 
                 <div class="sidebar-box ftco-animate">
                     <h3>Recent Blog</h3>
+                    @foreach($recent as $rc)
                     <div class="block-21 mb-4 d-flex">
                         <a class="blog-img mr-4"
-                            style="background-image: url({{asset('public/users/images/image_1.jpg')}});"></a>
+                            style="background-image: url({{asset('public/storage/image').'/'.$rc->image}});"></a>
                         <div class="text">
-                            <h3 class="heading"><a href="#">Even the all-powerful Pointing has no control about the
-                                    blind texts</a></h3>
+                            <h3 class="heading"><a href="{{url('property-single').'/'.$rc->post_id}}">{{$rc->title}}</a></h3>
                             <div class="meta">
-                                <div><a href="#"><span class="icon-calendar"></span> July 12, 2018</a></div>
-                                <div><a href="#"><span class="icon-person"></span> Admin</a></div>
-                                <div><a href="#"><span class="icon-chat"></span> 19</a></div>
+                                <div><a href="#"><span class="icon-calendar"></span> {{$rc->created_at}}</a></div>
+                                <div><a href="#"><span class="icon-person"></span> {{$rc->user_name}}</a></div>
+                                <!-- <div><a href="#"><span class="icon-chat"></span> 19</a></div> -->
                             </div>
                         </div>
                     </div>
-                    <div class="block-21 mb-4 d-flex">
-                        <a class="blog-img mr-4"
-                            style="background-image: url({{asset('public/users/images/image_2.jpg')}});"></a>
-                        <div class="text">
-                            <h3 class="heading"><a href="#">Even the all-powerful Pointing has no control about the
-                                    blind texts</a></h3>
-                            <div class="meta">
-                                <div><a href="#"><span class="icon-calendar"></span> July 12, 2018</a></div>
-                                <div><a href="#"><span class="icon-person"></span> Admin</a></div>
-                                <div><a href="#"><span class="icon-chat"></span> 19</a></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="block-21 mb-4 d-flex">
-                        <a class="blog-img mr-4"
-                            style="background-image: url({{asset('public/users/images/image_3.jpg')}});"></a>
-                        <div class="text">
-                            <h3 class="heading"><a href="#">Even the all-powerful Pointing has no control about the
-                                    blind texts</a></h3>
-                            <div class="meta">
-                                <div><a href="#"><span class="icon-calendar"></span> July 12, 2018</a></div>
-                                <div><a href="#"><span class="icon-person"></span> Admin</a></div>
-                                <div><a href="#"><span class="icon-chat"></span> 19</a></div>
-                            </div>
-                        </div>
-                    </div>
+                    @endforeach
                 </div>
 
                 <div class="sidebar-box ftco-animate">

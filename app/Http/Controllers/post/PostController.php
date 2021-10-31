@@ -252,7 +252,7 @@ class PostController extends Controller
             return redirect(url('post/'))->with('danger',$result.' Post Deleted');
         }else{
             $data['url'] = url('post');
-            return view('post.not-found',$data);
+            return view('error.error404',$data);
         }
     }
 }

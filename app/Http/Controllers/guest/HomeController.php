@@ -56,7 +56,8 @@ class HomeController extends Controller
     public function show($id)
     {
         $data['post'] = GetData::getPost($id,1);
-        $data['recent'] = DB::table('posts')->orderBy('post_id', 'desc')->take(10)->get();
+        $data['property_type'] = GetData::PropertyType();
+        $data['recent'] = $data['recent'] = Home::RecentPost();
         $data['recomanded'] = DB::table('posts')->orderBy('post_id', 'desc')->take(4)->get();
         return view('guest.propertysingle',$data);
     }
