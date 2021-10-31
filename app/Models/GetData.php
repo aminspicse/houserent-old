@@ -204,6 +204,12 @@ class GetData extends Model
         ->first();
     }
 
+    public static function allPost($status)
+    {
+        return DB::table('post_view')
+        ->where('post_status','=',$status)
+        ->paginate(50);
+    }
     
     public static function UserRoleCount($roleId)
     {

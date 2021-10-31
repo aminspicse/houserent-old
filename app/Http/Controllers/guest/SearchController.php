@@ -26,7 +26,7 @@ class SearchController extends Controller
         //return $request->keyword;
         //$keyword = $_GET['keyword'];
         $data['property'] = Search::search($request->keyword);
-
+        $data['property_count'] = $data['property']->count();
         return view('guest.search.search-home',$data);
     }
 

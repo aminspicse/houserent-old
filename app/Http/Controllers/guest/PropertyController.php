@@ -4,6 +4,8 @@ namespace App\Http\Controllers\guest;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\GetData;
+use Auth;
 use DB;
 class PropertyController extends Controller
 {
@@ -14,7 +16,7 @@ class PropertyController extends Controller
      */
     public function index()
     {
-        $data['property'] = DB::table('posts')->orderBy('post_id','desc')->paginate(3);
+        $data['property'] = GetData::allPost(1);//DB::table('post_view')->orderBy('post_id','desc')->paginate(50);
         return view('guest.property',$data);
     }
 

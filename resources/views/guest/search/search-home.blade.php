@@ -1,5 +1,8 @@
 @extends('guest.layout')
 
+@section('title')
+Search Result
+@endsection
 @section('slider')
 <div class="hero-wrap" style="background-image: url('{{asset('public/users/images/bg_1.jpg')}}');">
     <div class="overlay"></div>
