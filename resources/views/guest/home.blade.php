@@ -25,6 +25,173 @@
 </section>
 @endsection
 
+@section('search')
+    <section class="ftco-search">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12 search-wrap">
+                    <!--
+                    <h2 class="heading h5 d-flex align-items-center pr-4"><span class="ion-ios-search mr-3"></span>
+                        Search Property</h2> -->
+                    <form action="{{url('search')}}" method="get" class="search-property">
+                        @csrf
+                        <input type="text" name="keyword" placeholder="Search Heare" class="form-control">
+                        <!--
+                        <div class="row">
+                            <div class="col-md align-items-end">
+                                <div class="form-group">
+                                    <label for="#">Keyword</label>
+                                    <div class="form-field">
+                                        <div class="icon"><span class="icon-pencil"></span></div>
+                                        <input type="text" class="form-control" placeholder="Keyword">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md align-items-end">
+                                <div class="form-group">
+                                    <label for="#">Location</label>
+                                    <div class="form-field">
+                                        <div class="icon"><span class="icon-location_city"></span></div>
+                                        <input type="text" class="form-control" placeholder="City/Locality Name">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md align-items-end">
+                                <div class="form-group">
+                                    <label for="#">Property Type</label>
+                                    <div class="form-field">
+                                        <div class="select-wrap">
+                                            <div class="icon"><span class="ion-ios-arrow-down"></span></div>
+                                            <select name="" id="" class="form-control">
+                                                @foreach($property_type as $type)
+                                                    <option value="{{$type->property_type_id}}">{{$type->property_type_name}}</option>
+                                                @endforeach
+                                                
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md align-items-end">
+                                <div class="form-group">
+                                    <label for="#">Property Status</label>
+                                    <div class="form-field">
+                                        <div class="select-wrap">
+                                            <div class="icon"><span class="ion-ios-arrow-down"></span></div>
+                                            <select name="" id="" class="form-control">
+                                                <option value="">Type</option>
+                                                <option value="">Rent</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md align-items-end">
+                                <div class="form-group">
+                                    <label for="#">Agents</label>
+                                    <div class="form-field">
+                                        <div class="select-wrap">
+                                            <div class="icon"><span class="ion-ios-arrow-down"></span></div>
+                                            <select name="" id="" class="form-control">
+                                                <option value="">Any</option>
+                                                <option value="">Jonh Doe</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md align-items-end">
+                                <div class="form-group">
+                                    <label for="#">Min Beds</label>
+                                    <div class="form-field">
+                                        <div class="select-wrap">
+                                            <div class="icon"><span class="ion-ios-arrow-down"></span></div>
+                                            <select name="" id="" class="form-control">
+                                                <option value="">1</option>
+                                                <option value="">2</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md align-items-end">
+                                <div class="form-group">
+                                    <label for="#">Min Bathroom</label>
+                                    <div class="form-field">
+                                        <div class="select-wrap">
+                                            <div class="icon"><span class="ion-ios-arrow-down"></span></div>
+                                            <select name="" id="" class="form-control">
+                                                <option value="">1</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md align-items-end">
+                                <div class="form-group">
+                                    <label for="#">Min Price</label>
+                                    <div class="form-field">
+                                        <div class="select-wrap">
+                                            <div class="icon"><span class="ion-ios-arrow-down"></span></div>
+                                            <select name="" id="" class="form-control">
+                                                <option value="">Min Price</option>
+                                                <option value="">$1,000</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md align-items-end">
+                                <div class="form-group">
+                                    <label for="#">Min Price</label>
+                                    <div class="form-field">
+                                        <div class="select-wrap">
+                                            <div class="icon"><span class="ion-ios-arrow-down"></span></div>
+                                            <select name="" id="" class="form-control">
+                                                <option value="">Min Price</option>
+                                                <option value="">$5,000</option>
+                                                <option value="">$10,000</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md align-items-end">
+                                <div class="form-group">
+                                    <label for="#">Min Size <span>(sq ft)</span></label>
+                                    <div class="form-field">
+                                        <div class="icon"><span class="icon-pencil"></span></div>
+                                        <input type="text" class="form-control" placeholder="Min Size">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md align-items-end">
+                                <div class="form-group">
+                                    <label for="#">Max Size <span>(sq ft)</span></label>
+                                    <div class="form-field">
+                                        <div class="icon"><span class="icon-pencil"></span></div>
+                                        <input type="text" class="form-control" placeholder="Max Size">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md align-self-end">
+                                <div class="form-group">
+                                    <div class="form-field">
+                                        <input type="submit" value="Search" class="form-control btn btn-primary">
+                                    </div>
+                                </div>
+                            </div>
+                            -->
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+@endsection
 @section('content')
 <section class="ftco-section bg-light">
     <div class="container">

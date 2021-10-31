@@ -6,9 +6,10 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\guest\Home;
 use App\Models\GetData;
+use App\Models\guest\Search;
 use Auth;
 use DB;
-class HomeController extends Controller
+class SearchController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,15 +18,17 @@ class HomeController extends Controller
      */
     public function index()
     {
-        //return Home::TopPost();
-        $data['property_type'] = GetData::PropertyType();
-        $data['toppost'] = Home::TopPost();//DB::table('posts')->orderBy('post_id','desc')->take(5)->get();
-        $data['recent'] = Home::RecentPost();//DB::table('posts')->orderBy('post_id', 'desc')->take(10)->get();
-        $data['recomanded'] = Home::RecommendedPost();//DB::table('post_view')->orderBy('post_id', 'desc')->take(4)->get();
-        return view('guest.home',$data);
+        //
     }
 
-    
+    public function search(Request $request)
+    {
+        //return $request->keyword;
+        //$keyword = $_GET['keyword'];
+        $data['property'] = Search::search($request->keyword);
+
+        return view('guest.search.search-home',$data);
+    }
 
     /**
      * Show the form for creating a new resource.
@@ -56,11 +59,7 @@ class HomeController extends Controller
      */
     public function show($id)
     {
-        $data['post'] = GetData::getPost($id,1);
-        $data['property_type'] = GetData::PropertyType();
-        $data['recent'] = $data['recent'] = Home::RecentPost();
-        $data['recomanded'] = DB::table('posts')->orderBy('post_id', 'desc')->take(4)->get();
-        return view('guest.propertysingle',$data);
+        //
     }
 
     /**

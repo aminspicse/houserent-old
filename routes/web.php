@@ -9,6 +9,7 @@ use App\Http\Controllers\AppsData;
 //guest
 use App\Http\Controllers\guest\HomeController;
 use App\Http\Controllers\guest\PropertyController;
+use App\Http\Controllers\guest\SearchController;
 
 // Master Data Controller for admin
 use App\Http\Controllers\mst\AppsCountryController;
@@ -36,8 +37,8 @@ use App\Http\Controllers\ActivityController;
 Route::get('/',[HomeController::class,'index']);
 Route::get('/home',[HomeController::class,'index']);
 Route::get('/property',[PropertyController::class,'index']);
-
 Route::get('/property-single/{id}',[HomeController::class, 'show']);
+Route::get('/search/',[SearchController::class, 'search']);
 
 
 Auth::routes();
