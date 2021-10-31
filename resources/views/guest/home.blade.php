@@ -14,7 +14,7 @@
                     <h1 class="mb-3">{{$slid->title}}</h1>
                     <span class="location d-block mb-3"><i class="icon-my_location"></i> {{$slid->address}}</span>
                     <p>{{substr($slid->details,0,200)}}</p>
-                    <span class="price">{{$slid->currency_symbol.''.number_format($slid->price)}}</span>
+                    <span class="price">{{$slid->currency_symbol.''.$slid->price}}</span>
                     <a href="{{url('property-single'.'/'.$slid->post_id)}}" class="btn-custom p-3 px-4 bg-primary">View Details <span
                             class="icon-plus ml-1"></span></a>
                 </div>
@@ -104,7 +104,7 @@
                                         <p>{{$rc->property_type_name}}</p>
                                     </div>
                                     <div class="two">
-                                        <span class="price">{{$rc->currency_symbol.number_format($rc->price)}}</span>
+                                        <span class="price">{{$rc->currency_symbol.$rc->price}}</span>
                                     </div>
                                 </div>
                             </div>
@@ -146,7 +146,7 @@
                                 <p>{{$rec->property_type_name}}</p>
                             </div>
                             <div class="two">
-                                <span class="price">{{$rec->currency_symbol.number_format($rec->price)}}</span>
+                                <span class="price">{{$rec->currency_symbol.$rec->price}}</span>
                             </div>
                         </div>
                         <p>{{substr($rec->details,0,65)}}...</p>

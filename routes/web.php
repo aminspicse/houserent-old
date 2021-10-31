@@ -31,6 +31,7 @@ use App\Http\Controllers\user\UserDashboardController;
 
 // common access controller
 use App\Http\Controllers\post\PostController;
+use App\Http\Controllers\ActivityController;
 
 Route::get('/',[HomeController::class,'index']);
 Route::get('/home',[HomeController::class,'index']);
@@ -46,8 +47,8 @@ Auth::routes(['verify' => true]);
 
 Route::group(['prefix' => 'admin','middleware' => ['auth', 'verified','admin']], function() {
 	Route::get('/', [AdminDashboardController::class, 'dashboard'])->name('dashboard');
-    //Route::get('/create',[CreatePost::class,'index'])->name('create');
-    //Route::post('/post/store',[CreatePost::class,'store']);
+	Route::get('/dashboard', [AdminDashboardController::class, 'dashboard'])->name('dashboard');
+    
 
 	// COuntry
 	Route::resource('/country',AppsCountryController::class);
@@ -81,7 +82,7 @@ Route::group(['prefix' => 'user','middleware' => ['auth', 'verified','user']], f
 Route::group(['middleware' => ['auth', 'verified']], function() {
     Route::resource('/post',PostController::class);
 	Route::get('/post/delete/{id}',[PostController::class, 'deletePost']);
-
+	Route::get('/activity',[ActivityController::class,'index']);
 });
 
 

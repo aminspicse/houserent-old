@@ -1,11 +1,12 @@
 <?php
 
-namespace App\Http\Controllers\admin;
+namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\GetData;
-class AdminDashboardController extends Controller
+use Auth;
+use DB;
+class ActivityController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,20 +15,10 @@ class AdminDashboardController extends Controller
      */
     public function index()
     {
-        
+        $data['activity'] = GetData::ActiveSession(Auth::user()->id);
+        return view('activity.logged-device',$data);
     }
-    public function dashboard()
-    {
-        $data['user_cnt']   = GetData::UserRoleCount(3);
-        $data['agent_cnt']  = GetData::UserRoleCount(2);
-        $data['admin_cnt']  = GetData::UserRoleCount(1);
-        $data['total_user'] = GetData::TotalUser();
-        $data['active_user'] = GetData::TotalActiveUser();
-        $data['active_post'] = GetData::TotalActivePost(1);
-        
 
-        return view('admin.dashboard',$data);
-    }
     /**
      * Show the form for creating a new resource.
      *

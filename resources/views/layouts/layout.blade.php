@@ -69,6 +69,11 @@
                                 <!-- Admin Option -->
                                 <h3>Admin</h3>
                                 <ul class="nav side-menu">
+                                    <li><a><i class="fa fa-database"></i> Dashboard <span class="fa fa-chevron-down"></span></a>
+                                        <ul class="nav child_menu">
+                                            <li><a href="{{url('/admin/dashboard')}}">Dashboard</a></li>
+                                        </ul>
+                                    </li>
                                     <li><a><i class="fa fa-database"></i> Master Data <span class="fa fa-chevron-down"></span></a>
                                         <ul class="nav child_menu">
                                             <li><a href="{{url('/admin/country')}}">Country</a></li>
@@ -156,9 +161,9 @@
                                 <div class="dropdown-menu dropdown-usermenu pull-right"
                                     aria-labelledby="navbarDropdown">
                                     <a class="dropdown-item" href="{{url('/change-profile')}}"> Profile</a>
-                                    <a class="dropdown-item" href="javascript:;">
-                                        <span class="badge bg-red pull-right">50%</span>
-                                        <span>Settings</span>
+                                    <a class="dropdown-item" href="{{url('/activity')}}">
+                                        <span class="badge bg-red pull-right"></span>
+                                        <span>Activity</span>
                                     </a>
                                     <a class="dropdown-item" href="javascript:;">Help</a>
                                     <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();

@@ -202,6 +202,37 @@ class GetData extends Model
         ->first();
     }
 
+    
+    public static function UserRoleCount($roleId)
+    {
+        return DB::table('users')
+        ->where('role_id','=',$roleId)
+        ->count();
+    }
+    
+    public static function TotalUser()
+    {
+        return DB::table('users')
+        ->count();
+    }
+    public static function TotalActiveUser()
+    {
+        return DB::table('sessions')
+        ->where('user_id','!=',null)
+        ->count();
+    }
+    public static function TotalActivePost($status)
+    {
+        return DB::table('posts')
+        ->where('post_status','=',$status)
+        ->count();
+    }
+    public static function ActiveSession($id)
+    {
+        return DB::table('sessions')
+        ->where('user_id','=',$id)
+        ->get();
+    }
     public static function fetchById($table,$column,$id){
         return DB::table($table)
             ->where($column,'=',$id)
