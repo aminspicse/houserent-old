@@ -1,5 +1,9 @@
 @extends('layouts.layout')
 
+@section('title')
+    Create Country 
+@endsection
+
 @section('content_title')
     <h2>Add New Country</h2>
 @endsection
@@ -94,7 +98,7 @@
 
     <div class="ln_solid"></div>
     <div class="item form-group">
-        <div class="col-md-6 col-sm-6 offset-md-3">
+        <div class="col-md-6 col-sm-6 offset-md-7">
             <button class="btn btn-primary" type="reset">Reset</button>
             <button type="submit" class="btn btn-success">Add</button>
         </div>

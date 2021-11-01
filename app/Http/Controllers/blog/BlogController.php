@@ -1,14 +1,14 @@
 <?php
 
-namespace App\Http\Controllers\guest;
+namespace App\Http\Controllers\blog;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\guest\Home;
-use App\Models\GetData;
-use Auth;
 use DB;
-class HomeController extends Controller
+use App\Models\GetData;
+use App\Models\blog\Blog;
+use Auth;
+class BlogController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,20 +17,8 @@ class HomeController extends Controller
      */
     public function index()
     {
-        //return Home::TopPost();
-        $data['user']               = DB::table('user_view')->where('picture','!=',null)->get();
-        $data['active_country']     = GetData::activatedCountry()->count();
-        $data['user_total']         = GetData::TotalUser();
-        $data['agent_cnt']          = GetData::UserRoleCount(2);
-        $data['active_post']        = GetData::TotalActivePost(1);
-        $data['property_type']      = GetData::PropertyType();
-        $data['toppost']            = Home::TopPost();
-        $data['recent']             = Home::RecentPost();
-        $data['recomanded']         = Home::RecommendedPost();
-        return view('guest.home',$data);
+        //
     }
-
-    
 
     /**
      * Show the form for creating a new resource.
@@ -39,7 +27,7 @@ class HomeController extends Controller
      */
     public function create()
     {
-        //
+        return view('blog.create');
     }
 
     /**
@@ -50,7 +38,20 @@ class HomeController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'title' => ['required'],
+            'details' => ['required'],
+            'image' => ['required'],
+        ]);
+
+        $filename = $request->profilepicture->store('public/image');
+        $imagelink = substr($filename, 12);
+
+        return Blog::create([
+            'title' => $request->title,
+            'details' => $request->details,
+            'image' => $request->imagelink,
+        ]);
     }
 
     /**
@@ -61,11 +62,7 @@ class HomeController extends Controller
      */
     public function show($id)
     {
-        $data['post'] = GetData::getPost($id,1);
-        $data['property_type'] = GetData::PropertyType();
-        $data['recent'] = $data['recent'] = Home::RecentPost();
-        $data['recomanded'] = DB::table('posts')->orderBy('post_id', 'desc')->take(4)->get();
-        return view('guest.propertysingle',$data);
+        //
     }
 
     /**

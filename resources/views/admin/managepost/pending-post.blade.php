@@ -15,7 +15,6 @@
 <table id="datatable-buttons" class="table table-striped table-bordered dataTable no-footer dtr-inline" style="width: 100%;" role="grid" aria-describedby="datatable-buttons_info">
     <thead>
         <tr>
-            <th>SL</th>
             <th>ID</th>
             <th>Title</th>
             <th>Address</th>
@@ -23,17 +22,25 @@
         </tr>
     </thead>
     <tbody>
-        <?php $i=1;?>
         @foreach($post as $post)
         <tr>
-            <th>{{$i}}</th>
-            <th>{{$post->post_id}}</th>
-            <th><a href="{{url('admin/view-post').'/'.$post->post_id}}">{{$post->title}}</a></th>
-            <th>{{$post->address}}</th>
-            <th>
-               <a href="{{url('admin/change-status').'/'.$post->post_id}}/1" >Active</a>
-               <a href="{{url('admin/change-status').'/'.$post->post_id}}/0" >Inactive</a>
-            </th>
+            <td>{{$post->post_id}}</td>
+            <td><a href="{{url('admin/view-post').'/'.$post->post_id}}">{{$post->title}}</a></td>
+            <td>{{$post->address}}</td>
+            <td>
+                <ul class="" style="list-style:none">
+                    <li class="nav-item dropdown open" style="">
+                        <a href="javascript:;" class="user-profile dropdown-toggle" aria-haspopup="true"
+                            id="navbarDropdown" data-toggle="dropdown" aria-expanded="false">
+                            Action
+                        </a>
+                        <div class="dropdown-menu dropdown-usermenu pull-right" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="{{url('admin/change-status').'/'.$post->post_id}}/1" >Active</a>
+                            <a class="dropdown-item" href="{{url('admin/change-status').'/'.$post->post_id}}/0" >Inactive</a>
+                        </div>
+                    </li>
+                </ul>
+            </td>
         </tr>
         @endforeach
     </tbody>

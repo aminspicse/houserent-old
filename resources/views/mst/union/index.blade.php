@@ -1,5 +1,7 @@
 @extends('layouts.layout')
-
+@section('title')
+    Union
+@endsection
 @section('content_title')
 <h2>Union List</h2>
 <ul class="nav navbar-right panel_toolbox">

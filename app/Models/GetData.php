@@ -219,7 +219,7 @@ class GetData extends Model
         ->where('role_id','=',$roleId)
         ->count();
     }
-    
+   
     public static function TotalUser()
     {
         return DB::table('users')

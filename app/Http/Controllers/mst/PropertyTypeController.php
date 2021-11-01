@@ -18,7 +18,7 @@ class PropertyTypeController extends Controller
      */
     public function index()
     {
-        $data['property']  = GetData::allPropertyType();
+        $data['property']  = GetData::PropertyType();
         return view('mst.property-type.index',$data);
     }
 

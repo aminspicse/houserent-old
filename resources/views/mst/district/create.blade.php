@@ -1,5 +1,7 @@
 @extends('layouts.layout')
-
+@section('title')
+    District
+@endsection
 @section('content_title')
     <h2>Add New District</h2>
 @endsection

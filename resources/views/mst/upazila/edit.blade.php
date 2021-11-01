@@ -1,5 +1,7 @@
 @extends('layouts.layout')
-
+@section('title')
+    Upazila
+@endsection
 @section('content_title')
     <h2>Edit Upazila</h2>
 @endsection

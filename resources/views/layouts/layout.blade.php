@@ -96,8 +96,12 @@
                                         <ul class="nav child_menu">
                                             <li><a href="{{url('post/create')}}">Create Post</a></li>
                                             <li><a href="{{url('post/')}}">My Post</a></li>
-                                            <li><a href="{{url('/admin/profile-pic')}}">Dashboard2</a></li>
-                                            <li><a href="index3.html">Dashboard3</a></li>
+                                        </ul>
+                                    </li>
+                                    <li><a><i class="fa fa-home"></i> Blog <span class="fa fa-chevron-down"></span></a>
+                                        <ul class="nav child_menu">
+                                            <li><a href="{{url('blogs/create')}}">Create Post</a></li>
+                                            <li><a href="{{url('posts/')}}">My Post</a></li>
                                         </ul>
                                     </li>
                                     
@@ -110,15 +114,9 @@
                                         <ul class="nav child_menu">
                                             <li><a href="{{url('/post/create')}}">Create Post</a></li>
                                             <li><a href="{{url('post/')}}">My Post</a></li>
-                                            <li><a href="{{url('/admin/profile-pic-change')}}">Profile</a></li>
-                                            <li><a href="{{url('/')}}">Dashboard3</a></li>
                                         </ul>
                                     </li>
-                                    <li><a><i class="fa fa-edit"></i> Forms <span class="fa fa-chevron-down"></span></a>
-                                        <ul class="nav child_menu">
-                                            <li><a href="form.html">General Form</a></li>
-                                        </ul>
-                                    </li>
+                                    
                                 </ul>
                             @elseif(Auth::user()->role_id == 3)
                                 <!-- User Option -->
@@ -128,15 +126,9 @@
                                         <ul class="nav child_menu">
                                             <li><a href="{{url('/post/create')}}">Create Post</a></li>
                                             <li><a href="{{url('post/')}}">My Post</a></li>
-                                            <li><a href="{{url('/admin/profile-pic-change')}}">Dashboard2</a></li>
-                                            <li><a href="{{url('/')}}">Dashboard3</a></li>
                                         </ul>
                                     </li>
-                                    <li><a><i class="fa fa-edit"></i> Forms <span class="fa fa-chevron-down"></span></a>
-                                        <ul class="nav child_menu">
-                                            <li><a href="form.html">General Form</a></li>
-                                        </ul>
-                                    </li>
+                                    
                                 </ul>
                             @endif
                         </div>
@@ -160,12 +152,11 @@
                                 </a>
                                 <div class="dropdown-menu dropdown-usermenu pull-right"
                                     aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="{{url('/change-profile')}}"> Profile</a>
+                                    <a class="dropdown-item" href="{{url('/profile')}}"> Profile</a>
                                     <a class="dropdown-item" href="{{url('/activity')}}">
                                         <span class="badge bg-red pull-right"></span>
                                         <span>Activity</span>
                                     </a>
-                                    <a class="dropdown-item" href="javascript:;">Help</a>
                                     <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
                                          document.getElementById('logout-form').submit();">
                                         <i class="fa fa-sign-out pull-right"></i>
@@ -236,7 +227,9 @@
   <script src="{{ asset('public/admin/vendors/jszip/dist/jszip.min.js')}}"></script>
   <script src="{{ asset('public/admin/vendors/pdfmake/build/pdfmake.min.js')}}"></script>
   <script src="{{ asset('public/admin/vendors/pdfmake/build/vfs_fonts.js')}}"></script>
-
+<!-- bootstrap-daterangepicker -->
+    <script src="{{ asset('public/admin/vendors/moment/min/moment.min.js')}}"></script>
+    <script src="{{ asset('public/admin/vendors/bootstrap-daterangepicker/daterangepicker.js')}}"></script>
   <!-- Custom Theme Scripts -->
   <script src="{{ asset('public/admin/build/js/custom.min.js')}}"></script>
     <script>

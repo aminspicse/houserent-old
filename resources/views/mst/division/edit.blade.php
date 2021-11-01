@@ -1,5 +1,9 @@
 @extends('layouts.layout')
 
+@section('title')
+    Division/State
+@endsection
+
 @section('content_title')
     <h2>Edit State/Division</h2>
 @endsection

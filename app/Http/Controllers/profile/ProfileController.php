@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\profile;
 
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\ProfilePicture;
-use App\Models\User;
 use Auth;
-use DB;
+use App\Models\GetData;
+use App\Models\User;
 class ProfileController extends Controller
 {
     /**
@@ -16,7 +16,8 @@ class ProfileController extends Controller
      */
     public function index()
     {
-        //return view()
+        $data['session'] = GetData::ActiveSession(Auth::user()->id);
+        return view('profile.profile',$data);
     }
 
     /**
@@ -26,7 +27,7 @@ class ProfileController extends Controller
      */
     public function create()
     {
-        return view('profile.change-profile-pic');
+        
     }
 
     /**
@@ -37,13 +38,7 @@ class ProfileController extends Controller
      */
     public function store(Request $request)
     {
-        $filename = $request->profilepicture->store('public/image');
-        $imagelink = substr($filename, 12);
-
-        return ProfilePicture::create([
-            'user_id' => Auth::user()->id,
-            'picture' => 'imagelink'
-        ]);
+        
     }
 
     /**
@@ -63,9 +58,9 @@ class ProfileController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit()
     {
-        //
+        return view('profile.edit-profile');
     }
 
     /**
@@ -91,15 +86,16 @@ class ProfileController extends Controller
         }else{
             $name = Auth::user()->name;
         }
-        
 
-        
         $data->picture = $imagelink;
+        $data->address = $request->address;
+        $data->mobile = $request->mobile;
+        $data->testimonial = $request->testimonial;
         $data->name = $name;
         $data->save();
 
 
-        return redirect('/change-profile');
+        return redirect('/profile');
     }
 
     /**

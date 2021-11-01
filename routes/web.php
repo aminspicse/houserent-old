@@ -3,7 +3,7 @@
 use Illuminate\Support\Facades\Route;
 
 
-use App\Http\Controllers\ProfileController;
+//use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\AppsData;
 
 //guest
@@ -33,6 +33,8 @@ use App\Http\Controllers\user\UserDashboardController;
 // common access controller
 use App\Http\Controllers\post\PostController;
 use App\Http\Controllers\ActivityController;
+use App\Http\Controllers\profile\ProfileController;
+use App\Http\Controllers\blog\BlogController;
 
 Route::get('/',[HomeController::class,'index']);
 Route::get('/home',[HomeController::class,'index']);
@@ -84,6 +86,14 @@ Route::group(['middleware' => ['auth', 'verified']], function() {
     Route::resource('/post',PostController::class);
 	Route::get('/post/delete/{id}',[PostController::class, 'deletePost']);
 	Route::get('/activity',[ActivityController::class,'index']);
+	
+	Route::get('/profile',[ProfileController::class,'index']);
+	Route::get('/edit-profile',[ProfileController::class,'edit']);
+	Route::post('/update-profile',[ProfileController::class,'update']);
+
+	Route::get('/logout-other-device/{id}',[ActivityController::class,'logoutDevice']);
+
+	Route::resource('/blogs',BlogController::class);
 });
 
 

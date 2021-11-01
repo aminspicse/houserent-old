@@ -1,5 +1,8 @@
 @extends('layouts.layout')
 
+@section('title')
+    Country List
+@endsection
 @section('content_title')
 <h2>Country List</h2>
 <ul class="nav navbar-right panel_toolbox">

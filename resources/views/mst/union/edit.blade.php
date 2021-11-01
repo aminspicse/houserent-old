@@ -1,5 +1,7 @@
 @extends('layouts.layout')
-
+@section('title')
+    Union
+@endsection
 @section('content_title')
     <h2>Edit Union</h2>
 @endsection

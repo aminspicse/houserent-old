@@ -19,6 +19,11 @@ class ActivityController extends Controller
         return view('activity.logged-device',$data);
     }
 
+    public function logoutDevice($id)
+    {
+        DB::table('sessions')->where('id','=',$id)->delete();
+        return redirect(url('/profile'));
+    }
     /**
      * Show the form for creating a new resource.
      *

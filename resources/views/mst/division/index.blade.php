@@ -1,5 +1,8 @@
 @extends('layouts.layout')
 
+@section('title')
+    Division/State
+@endsection
 @section('content_title')
 <h2>Division List</h2>
 <ul class="nav navbar-right panel_toolbox">
