@@ -308,7 +308,7 @@
                         </div>
                     </a>
                     <div class="text p-3">
-                        <span class="status sale">Sale</span>
+                        <span class="status sale">{{$rec->property_for_name}}</span>
                         <div class="d-flex">
                             <div class="one">
                                 <h3><a href="{{url('property-single'.'/'.$rec->post_id)}}">{{substr($rec->title,0,18)}}..</a></h3>
@@ -338,7 +338,7 @@
     <div class="container">
         <div class="row justify-content-center mb-3 pb-3">
             <div class="col-md-7 text-center heading-section heading-section-white ftco-animate">
-                <h2 class="mb-4">Some fun facts</h2>
+                <h2 class="mb-4">User's Summary</h2>
             </div>
         </div>
         <div class="row justify-content-center">
@@ -415,7 +415,7 @@
     </div>
 </section>
 
-
+<!--
 <section class="ftco-section">
     <div class="container">
         <div class="row justify-content-center mb-5 pb-3">
@@ -492,4 +492,5 @@
         </div>
     </div>
 </section>
+-->
 @endsection

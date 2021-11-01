@@ -262,5 +262,15 @@ class GetData extends Model
         ->where([['d.district_status', '=',1],['division_id','=',$division]])
         ->get();
     }
+    public static function dependentUpazila($did){
+        return DB::table('apps_upazila as u')
+        ->where([['u.upazila_status', '=',1],['district_id','=',$did]])
+        ->get();
+    }
+    public static function dependentUnion($uid){
+        return DB::table('apps_union as u')
+        ->where([['u.union_status', '=',1],['upazila_id','=',$uid]])
+        ->get();
+    }
 
 }

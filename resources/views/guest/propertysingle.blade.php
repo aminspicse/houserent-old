@@ -1,5 +1,8 @@
 @extends('guest.layout')
 
+@section('title')
+{{$post->title}}
+@endsection
 @section('slider')
 <div class="hero-wrap" style="background-image: url('{{asset('public/users/images/bg_1.jpg')}}');">
     <div class="overlay"></div>
@@ -70,10 +73,7 @@
                                 
                             </ul>
                         </div>
-                        <p>When she reached the first hills of the Italic Mountains, she had a last view back on the
-                            skyline of her hometown Bookmarksgrove, the headline of Alphabet Village and the subline of
-                            her own road, the Line Lane. Pityful a rethoric question ran over her cheek, then she
-                            continued her way.</p>
+                        <p></p>
                     </div>
                     <div class="col-md-12 properties-single ftco-animate mb-5 mt-4">
                         <h3 class="mb-4">Take A Tour</h3>
@@ -145,66 +145,38 @@
                     <div class="col-md-12 properties-single ftco-animate mb-5 mt-5">
                         <h4 class="mb-4">Related Properties</h4>
                         <div class="row">
+                            @foreach($related as $reco)
                             <div class="col-md-6 ftco-animate">
                                 <div class="properties">
                                     <a href="property-single.html"
                                         class="img img-2 d-flex justify-content-center align-items-center"
-                                        style="background-image: url({{asset('public/users/images/properties-1.jpg')}});">
+                                        style="background-image: url({{asset('public/storage/image/'.$reco->image)}});">
                                         <div class="icon d-flex justify-content-center align-items-center">
                                             <span class="icon-search2"></span>
                                         </div>
                                     </a>
                                     <div class="text p-3">
-                                        <span class="status sale">Sale</span>
+                                        <span class="status sale">{{$reco->property_for_name}}</span>
                                         <div class="d-flex">
                                             <div class="one">
-                                                <h3><a href="property-single.html">North Parchmore Street</a></h3>
-                                                <p>Apartment</p>
+                                                <h3><a href="{{url('property-single').'/'.$reco->post_id}}">{{$reco->title}}</a></h3>
+                                                <p>{{$reco->property_type_name}}</p>
                                             </div>
                                             <div class="two">
-                                                <span class="price">$20,000</span>
+                                                <span class="price">{{$reco->currency_symbol.$reco->price}}</span>
                                             </div>
                                         </div>
-                                        <p>Far far away, behind the word mountains, far from the countries</p>
+                                        <p>{{substr($reco->details,0,65)}}</p>
                                         <hr>
                                         <p class="bottom-area d-flex">
-                                            <span><i class="flaticon-selection"></i> 250sqft</span>
-                                            <span class="ml-auto"><i class="flaticon-bathtub"></i> 3</span>
-                                            <span><i class="flaticon-bed"></i> 4</span>
+                                            <span><i class="flaticon-selection"></i> {{$reco->area}}</span>
+                                            <span class="ml-auto"><i class="flaticon-bathtub"></i> {{$reco->nm_bathroom}}</span>
+                                            <span><i class="flaticon-bed"></i> {{$reco->nm_bedroom}}</span>
                                         </p>
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-6 ftco-animate">
-                                <div class="properties">
-                                    <a href="property-single.html"
-                                        class="img img-2 d-flex justify-content-center align-items-center"
-                                        style="background-image: url({{asset('public/users/images/properties-2.jpg')}});">
-                                        <div class="icon d-flex justify-content-center align-items-center">
-                                            <span class="icon-search2"></span>
-                                        </div>
-                                    </a>
-                                    <div class="text p-3">
-                                        <span class="status sale">Sale</span>
-                                        <div class="d-flex">
-                                            <div class="one">
-                                                <h3><a href="property-single.html">North Parchmore Street</a></h3>
-                                                <p>Apartment</p>
-                                            </div>
-                                            <div class="two">
-                                                <span class="price">$20,000</span>
-                                            </div>
-                                        </div>
-                                        <p>Far far away, behind the word mountains, far from the countries</p>
-                                        <hr>
-                                        <p class="bottom-area d-flex">
-                                            <span><i class="flaticon-selection"></i> 250sqft</span>
-                                            <span class="ml-auto"><i class="flaticon-bathtub"></i> 3</span>
-                                            <span><i class="flaticon-bed"></i> 4</span>
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
+                            @endforeach
                         </div>
                     </div>
 
@@ -212,10 +184,11 @@
             </div> <!-- .col-md-8 -->
             <div class="col-lg-4 sidebar ftco-animate">
                 <div class="sidebar-box">
-                    <form action="#" class="search-form">
+                    <form action="{{url('search')}}" class="search-form">
+                        @csrf
                         <div class="form-group">
                             <span class="icon fa fa-search"></span>
-                            <input type="text" class="form-control" placeholder="Type a keyword and hit enter">
+                            <input type="text" name="keyword" class="form-control" placeholder="Type a keyword and hit enter">
                         </div>
                     </form>
                 </div>
@@ -248,8 +221,9 @@
                 </div>
 
                 <div class="sidebar-box ftco-animate">
-                    <h3>Tag Cloud</h3>
+                    <h3>Tag</h3>
                     <div class="tagcloud">
+                        <!--
                         <a href="#" class="tag-cloud-link">dish</a>
                         <a href="#" class="tag-cloud-link">menu</a>
                         <a href="#" class="tag-cloud-link">food</a>
@@ -258,14 +232,19 @@
                         <a href="#" class="tag-cloud-link">delicious</a>
                         <a href="#" class="tag-cloud-link">desserts</a>
                         <a href="#" class="tag-cloud-link">drinks</a>
+                        -->
+                        <p class="text-danger">Under Developement</p>
                     </div>
                 </div>
 
                 <div class="sidebar-box ftco-animate">
                     <h3>Paragraph</h3>
+                    <p class="text-danger">Under Developement</p>
+                    <!--
                     <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ducimus itaque, autem necessitatibus
                         voluptate quod mollitia delectus aut, sunt placeat nam vero culpa sapiente consectetur
                         similique, inventore eos fugit cupiditate numquam!</p>
+                    -->
                 </div>
             </div>
         </div>

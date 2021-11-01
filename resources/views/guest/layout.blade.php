@@ -8,7 +8,7 @@
     </title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
+    <link rel = "icon" href ="{{asset('public/icon/icon.jpg')}}" type = "image/x-icon">
     <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" rel="stylesheet">
 
     <link rel="stylesheet" href="{{asset('public/users/css/open-iconic-bootstrap.min.css')}}">
@@ -78,8 +78,6 @@
                                 @elseif(Auth::user()->role_id == '3')
                                 <a href="{{url('/user')}}">User Pannel</a>
                                 @endif
-                                <a href="#">Link 1</a>
-                                <a href="#">Link 2</a>
                                 <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
                                          document.getElementById('logout-form').submit();">
                                     {{ __('Logout') }}
@@ -114,16 +112,20 @@
                 <div class="row d-flex justify-content-center">
                     <div class="col-md-7 text-center heading-section heading-section-white ftco-animate">
                         <h2>Subcribe to our Newsletter</h2>
-                        <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia,
-                            there live the blind texts. Separated they live in</p>
+                        <p></p>
                         <div class="row d-flex justify-content-center mt-5">
                             <div class="col-md-8">
-                                <form action="#" class="subscribe-form">
+                                <form action="{{url('subscribe')}}" method="post" class="subscribe-form">
+                                    @csrf
                                     <div class="form-group d-flex">
-                                        <input type="text" class="form-control" placeholder="Enter email address">
+                                        <input type="email" name="email" class="form-control" placeholder="Enter email address">
                                         <input type="submit" value="Subscribe" class="submit px-3">
+                                        
                                     </div>
                                 </form>
+                                @error('email')
+                                    <span class="text-danger">{{$message}}</span>
+                                @enderror
                             </div>
                         </div>
                     </div>

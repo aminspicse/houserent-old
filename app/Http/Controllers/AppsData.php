@@ -32,7 +32,7 @@ class AppsData extends Controller
     public function getThana(Request $request)
     {
         $dist = $request->post('dist');
-        $thana = DB::table('apps_upazila')->where('district_id',$dist)->get();
+        $thana = GetData::dependentUpazila($dist);//DB::table('apps_upazila')->where('district_id',$dist)->get();
         $html = '<option>Select Thana/Upazila</option>';
         foreach($thana as $list){
             $html .= '<option value="'.$list->upazila_id.'">'.$list->upazila_name.' ('.$list->local_name.')</option>';
@@ -43,7 +43,7 @@ class AppsData extends Controller
     public function getUnion(Request $request)
     {
         $tna = $request->post('tna');
-        $union = DB::table('apps_union')->where('upazila_id',$tna)->get();
+        $union = GetData::dependentUnion($tna);//DB::table('apps_union')->where('upazila_id',$tna)->get();
         $html = '<option>Select Union/City</option>';
         foreach($union as $list){
             $html .= '<option value="'.$list->union_id.'">'.$list->union_name.' ('.$list->local_name.')</option>';

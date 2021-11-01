@@ -7,7 +7,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
+    <link rel = "icon" href ="{{asset('public/icon/icon.jpg')}}" type = "image/x-icon">
     <title>
         @yield('title'):
         {{ config('app.name', 'HRentSolution') }}
@@ -98,12 +98,7 @@
                                             <li><a href="{{url('post/')}}">My Post</a></li>
                                         </ul>
                                     </li>
-                                    <li><a><i class="fa fa-home"></i> Blog <span class="fa fa-chevron-down"></span></a>
-                                        <ul class="nav child_menu">
-                                            <li><a href="{{url('blogs/create')}}">Create Post</a></li>
-                                            <li><a href="{{url('posts/')}}">My Post</a></li>
-                                        </ul>
-                                    </li>
+                                    
                                     
                                 </ul>
                             @elseif(Auth::user()->role_id == 2)

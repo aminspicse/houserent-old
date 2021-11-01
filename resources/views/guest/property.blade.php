@@ -9,8 +9,8 @@ Property
     <div class="container">
         <div class="row no-gutters slider-text align-items-center justify-content-center">
             <div class="col-md-9 ftco-animate text-center">
-                <p class="breadcrumbs"><span class="mr-2"><a href="">Search</a></span> <span>Property</span></p>
-                <h1 class="mb-3 bread">Search Result</h1>
+                <p class="breadcrumbs"><span class="mr-2"><a href="">Home</a></span> <span>Property</span></p>
+                <h1 class="mb-3 bread">Property</h1>
             </div>
         </div>
     </div>

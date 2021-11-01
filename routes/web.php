@@ -10,6 +10,7 @@ use App\Http\Controllers\AppsData;
 use App\Http\Controllers\guest\HomeController;
 use App\Http\Controllers\guest\PropertyController;
 use App\Http\Controllers\guest\SearchController;
+use App\Http\Controllers\SubscribeController;
 
 // Master Data Controller for admin
 use App\Http\Controllers\mst\AppsCountryController;
@@ -41,6 +42,7 @@ Route::get('/home',[HomeController::class,'index']);
 Route::get('/property',[PropertyController::class,'index']);
 Route::get('/property-single/{id}',[HomeController::class, 'show']);
 Route::get('/search/',[SearchController::class, 'search']);
+Route::post('/subscribe/',[SubscribeController::class, 'store']);
 
 
 Auth::routes();
@@ -93,7 +95,7 @@ Route::group(['middleware' => ['auth', 'verified']], function() {
 
 	Route::get('/logout-other-device/{id}',[ActivityController::class,'logoutDevice']);
 
-	Route::resource('/blogs',BlogController::class);
+	//Route::resource('/blogs',BlogController::class);
 });
 
 

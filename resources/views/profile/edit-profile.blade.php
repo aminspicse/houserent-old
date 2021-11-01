@@ -1,7 +1,10 @@
 @extends('layouts.layout')
 
+@section('title')
+    Edit Profile
+@endsection
 @section('content_title')
-<h2>Edit Profile Info</h2>
+    <h2>Edit Profile Info</h2>
 @endsection
 @section('content')
 
@@ -37,7 +40,7 @@
             <span class="required">*</span>
         </label>
         <div class="col-md-6 col-sm-6 ">
-            <textarea class="form-control" name="testimonial" id="" cols="30" rows="1"></textarea>
+            <textarea class="form-control" name="testimonial" id="" cols="30" rows="1">{{Auth::user()->testimonial}}</textarea>
         </div>
     </div>
     <div class="item form-group">
