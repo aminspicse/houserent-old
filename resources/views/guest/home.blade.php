@@ -202,8 +202,10 @@
                         <div class="icon"><span class="flaticon-pin"></span></div>
                     </div>
                     <div class="media-body p-2 mt-2">
-                        <h3 class="heading mb-3">Find Places Anywhere In The World</h3>
-                        <p>A small river named Duden flows by their place and supplies.</p>
+                        <h3 class="heading mb-3">Find Appertment Anywhere In The World</h3>
+                        
+                        <p>Find Your Dream House/ Apertment Any where with more effecent way.</p>
+                        
                     </div>
                 </div>
             </div>
@@ -214,7 +216,7 @@
                     </div>
                     <div class="media-body p-2 mt-2">
                         <h3 class="heading mb-3">We Have Agents With Experience</h3>
-                        <p>A small river named Duden flows by their place and supplies.</p>
+                        <p>We Have Many area based Agents With Experience in Construction and House Rent.</p>
                     </div>
                 </div>
             </div>
@@ -225,7 +227,7 @@
                     </div>
                     <div class="media-body p-2 mt-2">
                         <h3 class="heading mb-3">Buy &amp; Rent Modern Properties</h3>
-                        <p>A small river named Duden flows by their place and supplies.</p>
+                        <p>You Can Rent, Buy and sale your house/properties it is free of cost now.</p>
                     </div>
                 </div>
             </div>
@@ -235,8 +237,8 @@
                         <div class="icon"><span class="flaticon-purse"></span></div>
                     </div>
                     <div class="media-body p-2 mt-2">
-                        <h3 class="heading mb-3">Making Money</h3>
-                        <p>A small river named Duden flows by their place and supplies.</p>
+                        <h3 class="heading mb-3">Make Payment Your Properties</h3>
+                        <p>You can payment by House Rent Solution. HRS accept BKash, Paypel, Master Card.</p>
                     </div>
                 </div>
             </div>
@@ -345,15 +347,15 @@
                     <div class="col-md-3 d-flex justify-content-center counter-wrap ftco-animate">
                         <div class="block-18 text-center">
                             <div class="text">
-                                <strong class="number" data-number="9000">0</strong>
-                                <span>Happy Customers</span>
+                                <strong class="number" data-number="{{$user_total}}">0</strong>
+                                <span>Happy User</span>
                             </div>
                         </div>
                     </div>
                     <div class="col-md-3 d-flex justify-content-center counter-wrap ftco-animate">
                         <div class="block-18 text-center">
                             <div class="text">
-                                <strong class="number" data-number="10000">0</strong>
+                                <strong class="number" data-number="{{$active_post}}">0</strong>
                                 <span>Properties</span>
                             </div>
                         </div>
@@ -361,7 +363,7 @@
                     <div class="col-md-3 d-flex justify-content-center counter-wrap ftco-animate">
                         <div class="block-18 text-center">
                             <div class="text">
-                                <strong class="number" data-number="1000">0</strong>
+                                <strong class="number" data-number="{{$agent_cnt}}">0</strong>
                                 <span>Agents</span>
                             </div>
                         </div>
@@ -369,8 +371,8 @@
                     <div class="col-md-3 d-flex justify-content-center counter-wrap ftco-animate">
                         <div class="block-18 text-center">
                             <div class="text">
-                                <strong class="number" data-number="100">0</strong>
-                                <span>Awards</span>
+                                <strong class="number" data-number="{{$active_country}}">0</strong>
+                                <span>Active Country</span>
                             </div>
                         </div>
                     </div>

@@ -18,12 +18,12 @@ class AdminDashboardController extends Controller
     }
     public function dashboard()
     {
-        $data['user_cnt']   = GetData::UserRoleCount(3);
-        $data['agent_cnt']  = GetData::UserRoleCount(2);
-        $data['admin_cnt']  = GetData::UserRoleCount(1);
-        $data['total_user'] = GetData::TotalUser();
-        $data['active_user'] = GetData::TotalActiveUser();
-        $data['active_post'] = GetData::TotalActivePost(1);
+        $data['user_cnt']       = GetData::UserRoleCount(3);
+        $data['agent_cnt']      = GetData::UserRoleCount(2);
+        $data['admin_cnt']      = GetData::UserRoleCount(1);
+        $data['total_user']     = GetData::TotalUser();
+        $data['active_user']    = GetData::TotalActiveUser();
+        $data['active_post']    = GetData::TotalActivePost(1);
         
 
         return view('admin.dashboard',$data);

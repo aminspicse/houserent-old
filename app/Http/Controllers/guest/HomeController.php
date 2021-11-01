@@ -18,10 +18,14 @@ class HomeController extends Controller
     public function index()
     {
         //return Home::TopPost();
-        $data['property_type'] = GetData::PropertyType();
-        $data['toppost'] = Home::TopPost();//DB::table('posts')->orderBy('post_id','desc')->take(5)->get();
-        $data['recent'] = Home::RecentPost();//DB::table('posts')->orderBy('post_id', 'desc')->take(10)->get();
-        $data['recomanded'] = Home::RecommendedPost();//DB::table('post_view')->orderBy('post_id', 'desc')->take(4)->get();
+        $data['active_country']     = GetData::activatedCountry()->count();
+        $data['user_total']         = GetData::TotalUser();
+        $data['agent_cnt']          = GetData::UserRoleCount(2);
+        $data['active_post']        = GetData::TotalActivePost(1);
+        $data['property_type']      = GetData::PropertyType();
+        $data['toppost']            = Home::TopPost();
+        $data['recent']             = Home::RecentPost();
+        $data['recomanded']         = Home::RecommendedPost();
         return view('guest.home',$data);
     }
 

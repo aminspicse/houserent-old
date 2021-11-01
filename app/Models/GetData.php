@@ -10,6 +10,8 @@ class GetData extends Model
 {
     use HasFactory;
 
+   
+
     public static function allCountry(){
         return DB::table('apps_country')
              ->orderBy('country_status','DESC')
